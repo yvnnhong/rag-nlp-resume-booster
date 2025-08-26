@@ -48,17 +48,14 @@ RAG-NLP-RESUME-BOOSTER/
 ├── data/
 │   ├── sample_resumes/       # Sample PDFs for testing
 │   ├── knowledge_base/       # Resume best practices docs
-│   ├── job_descriptions/     # Sample job descriptions
 │   └── processed/            # Processed/cached data
 │
 ├── tests/
 │   ├── __init__.py
 │   ├── test_parser.py
-│   ├── test_analyzer.py
-│   ├── test_models.py
-│   └── test_api.py
+│   └── test_integration.py
 │
 ├── docs/
-│   ├── api_documentation.md
-│   ├── architecture.md
+│   ├── troubleshooting.md
+│   ├── execution_flow.md
 │   └── deployment_guide.md

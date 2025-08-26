@@ -9,9 +9,9 @@ class PDFExtractor:
     def __init__(self): 
         self.supported_formats = ['.pdf']
 
-    #extract_text is for disk; does NOT need gradio interface to test
+    #extract_text_disk is for disk; does NOT need gradio interface to test
     #local development testing aka command line testing 
-    def extract_text(self, pdf_path: str) -> Optional[Dict[str, Any]]: 
+    def extract_text_disk(self, pdf_path: str) -> Optional[Dict[str, Any]]: 
         try:
             if not Path(pdf_path).exists(): 
                 logger.error(f"File not found: {pdf_path}")
@@ -60,3 +60,6 @@ class PDFExtractor:
                 'extraction_status': 'failed',
                 'error': str(e)
             }
+        
+    #extract_from_bytes is for gradio testing (web upload scenario, aka other users)
+    def extract_from_bytes(self, pdf_bytes: bytes, filename: str = "upload.pdf") -> Optional[Dict[str, Any]]: 

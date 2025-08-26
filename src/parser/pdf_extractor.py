@@ -41,3 +41,20 @@ class PDFExtractor:
             logger.info(f"Successfully extracted text from {pdf_path}")
             logger.info(f"Pages: {result['page_count']}, Characters: {result['char_count']}")
             return result 
+        
+        except Exception as e: 
+            logger.error(f"Error extracting text from {pdf_path}: {str(e)}")
+            if pdf_path is not None: 
+                file_name = Path(pdf_path).name
+            else:
+                file_name = 'unknown'
+            #return a dict with empty stats to prevent crashing 
+            return {
+                'full_text': '',
+                'page_texts': [],
+                'page_count': 0,
+                'char_count': 0,
+                'file_name': file_name,
+                'extraction_status': 'failed',
+                'error': str(e)
+            }

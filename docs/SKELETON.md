@@ -6,7 +6,6 @@ RAG-NLP-RESUME-BOOSTER/
 ├── .gitignore
 │
 ├── src/
-│   ├── __init__.py
 │   ├── parser/
 │   │   ├── __init__.py
 │   │   ├── pdf_extractor.py   # PDF text extraction
@@ -58,17 +57,6 @@ RAG-NLP-RESUME-BOOSTER/
 │   ├── test_analyzer.py
 │   ├── test_models.py
 │   └── test_api.py
-│
-├── scripts/
-│   ├── setup_database.py     # Initialize vector database
-│   ├── train_models.py       # Train custom models
-│   ├── generate_samples.py   # Generate test data
-│   └── deploy.py            # Deployment script
-│
-├── configs/
-│   ├── model_config.yaml     # Model hyperparameters
-│   ├── analyzer_config.yaml  # Analysis settings
-│   └── logging_config.yaml   # Logging configuration
 │
 ├── docs/
 │   ├── api_documentation.md

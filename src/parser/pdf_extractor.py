@@ -38,3 +38,6 @@ class PDFExtractor:
                 'file_name': Path(pdf_path).name,
                 'extraction_status': 'success'
             }
+            logger.info(f"Successfully extracted text from {pdf_path}")
+            logger.info(f"Pages: {result['page_count']}, Characters: {result['char_count']}")
+            return result 

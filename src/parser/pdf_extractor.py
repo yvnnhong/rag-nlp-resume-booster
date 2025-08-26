@@ -9,6 +9,8 @@ class PDFExtractor:
     def __init__(self): 
         self.supported_formats = ['.pdf']
 
+    #extract_text is for disk; does NOT need gradio interface to test
+    #local development testing aka command line testing 
     def extract_text(self, pdf_path: str) -> Optional[Dict[str, Any]]: 
         try:
             if not Path(pdf_path).exists(): 

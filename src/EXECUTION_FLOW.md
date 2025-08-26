@@ -15,7 +15,7 @@ Raw PDF processing and text extraction:
 ### 2. MODELS (Second Stage)
 Text vectorization and classification:
 - **`embeddings.py`** → Convert text sections to vector embeddings
-- **`classification.py`** → Classify and score different resume components (optional)
+- **`classification.py`** → Classify and score different resume components (subject to change)
 
 ### 3. ANALYZER (Third Stage)
 Multi-faceted resume analysis:
@@ -35,3 +35,5 @@ PDF Upload → PARSER → MODELS → ANALYZER + DATABASE → Final Report
 ```
 
 Each stage builds upon the previous one, with the DATABASE stage providing additional context during the analysis phase.
+
+Note: this document is subject to change

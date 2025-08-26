@@ -1,4 +1,4 @@
-import PyMuPDF #fitz -- to handle opening PDF files and extracting text from them 
+import fitz #to handle opening PDF files and extracting text from them (aka PyMUPDF)
 import logging 
 from pathlib import Path
 from typing import Optional, Dict, Any
@@ -17,7 +17,7 @@ class PDFExtractor:
             if not pdf_path.lower().endswith('.pdf'):
                 logger.error(f"This is unsupported file format: {pdf_path}")
                 return None
-            doc = PyMuPDF.open(pdf_path)
+            doc = fitz.open(pdf_path)
             #initialize variables for text extraction
             full_text = ""
             page_texts = []

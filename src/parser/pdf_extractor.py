@@ -63,3 +63,12 @@ class PDFExtractor:
         
     #extract_from_bytes is for gradio testing (web upload scenario, aka other users)
     def extract_from_bytes(self, pdf_bytes: bytes, filename: str = "upload.pdf") -> Optional[Dict[str, Any]]: 
+        try: 
+            doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+            full_text = ""
+            page_texts = []
+            for page_num in range(doc.page_count): 
+                page = doc[page_num]
+                page_text = page.get_text()
+                page_texts.append()
+

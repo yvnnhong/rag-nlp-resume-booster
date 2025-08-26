@@ -70,5 +70,30 @@ class PDFExtractor:
             for page_num in range(doc.page_count): 
                 page = doc[page_num]
                 page_text = page.get_text()
-                page_texts.append()
+                page_texts.append(page_text)
+                full_text += page_text + "\n"
+            doc.close()
+            result = {
+                'full_text': full_text.strip(),
+                'page_texts': page_texts,
+                'page_count': len(page_texts),
+                'char_count': len(full_text),
+                'file_name': filename,
+                'extraction_status': 'success'
+            }
+            logger.info(f"Successfully extracted text from uploaded file: {filename}")
+            logger.info(f"Pages: {result['page_count']}, Characters: {result['char_count']}")
+            return result 
+        except Exception as e: 
+            logger.error(f"Error extracting text from uploaded file {filename}: {str(e)}")
+            return {
+                'full_text': '',
+                'page_texts': [],
+                'page_count': 0,
+                'char_count': 0,
+                'file_name': filename,
+                'extraction_status': 'failed',
+                'error': str(e)
+            }
+    
 

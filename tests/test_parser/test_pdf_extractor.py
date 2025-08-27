@@ -14,6 +14,9 @@ def test_single_resume_file(extractor, file_path, test_name):
         print(f"First 150 chars: {result['full_text'][:150]}...")
         return True 
     else: 
-        print(f"The extraction failed.")
+        if result and 'error' in result:
+            error_msg = result['error']
+        else: 
+            error_msg = 'Unknown error'
+        print(f"Bytes extraction failed: {error_msg}")
         return False
-

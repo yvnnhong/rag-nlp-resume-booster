@@ -3,7 +3,7 @@ import sys
 sys.path.append('../../src') #go up two levels 
 from src.parser.pdf_extractor import PDFExtractor
 
-def test_single_resume_file(extractor, file_path, test_name):
+def test_single_resume_file_disk(extractor, file_path, test_name):
     print(f"\nTesting {test_name}")
     result = extractor.extract_text_disk(file_path)
     if result and result['extraction_status'] == 'success': 
@@ -27,4 +27,8 @@ def test_single_resume_file_bytes(extractor, file_path, test_name):
         with open(file_path, 'rb') as file: #open pdf in binary read mode ('rb')
             pdf_bytes = file.read()
         result = extractor.extract_from_bytes(pdf_bytes, filename=file_path.split('/')[-1])
-        
+        if result and result['extraction_status'] == 'success': 
+            print(f"Bytes extraction successful.")
+            print(f"File name: {result['file_name']}")
+            print(f"Pages: ")
+

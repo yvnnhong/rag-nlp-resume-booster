@@ -20,3 +20,11 @@ def test_single_resume_file(extractor, file_path, test_name):
             error_msg = 'Unknown error'
         print(f"Bytes extraction failed: {error_msg}")
         return False
+    
+def test_single_resume_file_bytes(extractor, file_path, test_name):
+    print(f"\nTesting {test_name} using the bytes method.")
+    try:
+        with open(file_path, 'rb') as file: #open pdf in binary read mode ('rb')
+            pdf_bytes = file.read()
+        result = extractor.extract_from_bytes(pdf_bytes, filename=file_path.split('/')[-1])
+        

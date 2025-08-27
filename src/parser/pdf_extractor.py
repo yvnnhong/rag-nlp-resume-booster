@@ -1,7 +1,7 @@
 import fitz #to handle opening PDF files and extracting text from them (aka PyMUPDF)
 import logging 
 from pathlib import Path
-from typing import Optional, Dict, Any
+from typing import Dict, Any
 
 logger = logging.getLogger(__name__)
 
@@ -11,7 +11,7 @@ class PDFExtractor:
 
     #extract_text_disk is for disk; does NOT need gradio interface to test
     #local development testing aka command line testing 
-    def extract_text_disk(self, pdf_path: str) -> Optional[Dict[str, Any]]: 
+    def extract_text_disk(self, pdf_path: str) -> Dict[str, Any]: 
         try:
             if not Path(pdf_path).exists(): 
                 logger.error(f"File not found: {pdf_path}")
@@ -62,7 +62,7 @@ class PDFExtractor:
             }
         
     #extract_from_bytes is for gradio testing (web upload scenario, aka other users)
-    def extract_from_bytes(self, pdf_bytes: bytes, filename: str = "upload.pdf") -> Optional[Dict[str, Any]]: 
+    def extract_from_bytes(self, pdf_bytes: bytes, filename: str = "upload.pdf") -> Dict[str, Any]: 
         try: 
             doc = fitz.open(stream=pdf_bytes, filetype="pdf")
             full_text = ""

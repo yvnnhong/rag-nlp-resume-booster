@@ -18,7 +18,7 @@ def test_single_resume_file_disk(extractor, file_path, test_name):
             error_msg = result['error']
         else: 
             error_msg = 'Unknown error'
-        print(f"Bytes extraction failed: {error_msg}")
+        print(f"(Disk) Extraction failed: {error_msg}")
         return False
     
 def test_single_resume_file_bytes(extractor, file_path, test_name):
@@ -28,7 +28,21 @@ def test_single_resume_file_bytes(extractor, file_path, test_name):
             pdf_bytes = file.read()
         result = extractor.extract_from_bytes(pdf_bytes, filename=file_path.split('/')[-1])
         if result and result['extraction_status'] == 'success': 
-            print(f"Bytes extraction successful.")
+            print(f"Bytes extraction is successful.")
             print(f"File name: {result['file_name']}")
-            print(f"Pages: ")
+            print(f"Total number of Pages: {result['page_count']}")
+            print(f"Total number of characters: {result['char_count']}")
+            print(f"First 150 chars: {result['full_text'][:150]}...")
+            return True
+        else: 
+            if result and 'error' in result: 
+                error_msg = result['error']
+            else: 
+                error_msg = 'Unknown error'
+            print(f"Bytes Extraction failed: {error_msg}")
+            return False
+    except FileNotFoundError: 
+        print(f"File not found: {file_path}")
+        return False
+
 

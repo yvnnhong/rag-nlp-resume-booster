@@ -44,5 +44,12 @@ def test_single_resume_file_bytes(extractor, file_path, test_name):
     except FileNotFoundError: 
         print(f"File not found: {file_path}")
         return False
+    
+def test_all_resumes():
+    extractor = PDFExtractor()
+    test_files = [
+        
+    ]
+
 
 

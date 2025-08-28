@@ -1,3 +1,4 @@
+#pdf_extractor.py is step 1 
 import fitz #to handle opening PDF files and extracting text from them (aka PyMUPDF)
 import logging 
 from pathlib import Path

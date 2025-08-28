@@ -48,8 +48,39 @@ def test_single_resume_file_bytes(extractor, file_path, test_name):
 def test_all_resumes():
     extractor = PDFExtractor()
     test_files = [
-        
+        ("../../data/sample_resumes/standard_1pg_resume.pdf", "Standard 1-Page Resume"),
+        ("../../data/sample_resumes/long_resume_6pgs.pdf", "Long 6-Page Resume"),
+        ("../../data/sample_resumes/sparse_resume.pdf", "Sparse 1-Page Resume")
     ]
+    disk_results = []
+    bytes_results = []
+    print("=" * 60)
+    print("TESTING PDF EXTRACTION - DISK METHOD")
+    print("=" * 60)
+    #Test the disk method for all files 
+    for file_path, test_name in test_files: 
+        success = test_single_resume_file_disk(extractor, file_path, test_name)
+        disk_results.append((test_name, success))
+
+    print("\n")
+    print("=" * 60)
+    print("TESTING PDF EXTRACTION - BYTES METHOD")
+    print("=" * 60)
+
+    #test the bytes method for all files 
+    for file_path, test_name in test_files: 
+        success = test_single_resume_file_bytes(extractor, file_path, test_name)
+        bytes_results.append((test_name, success))
+
+    #summary! 
+    print("\n")
+    print("=" * 60)
+    print("TEST SUMMARY")
+    print("=" * 60)
+
+
+
+
 
 
 

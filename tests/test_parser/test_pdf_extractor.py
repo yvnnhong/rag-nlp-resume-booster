@@ -107,6 +107,8 @@ def test_all_resumes():
         if success: 
             bytes_passed += 1 
 
+    #todo: find a way to clearly print out all final results (if necessary?)
+
 if __name__ == "__main__":
     logging.basicConfig(
         level=logging.INFO,

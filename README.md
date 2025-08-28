@@ -1,1 +1,1 @@
-this is my readme lol
+Large parts of this proejct are refactored from https://github.com/yvnnhong/document-qa-rag-mlops-pipeline

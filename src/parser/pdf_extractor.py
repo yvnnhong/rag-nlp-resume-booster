@@ -15,10 +15,26 @@ class PDFExtractor:
         try:
             if not Path(pdf_path).exists(): 
                 logger.error(f"File not found: {pdf_path}")
-                return None
+                return {
+                    'full_text': '',
+                    'page_texts': [],
+                    'page_count': 0,
+                    'char_count': 0,
+                    'file_name': 'unknown',
+                    'extraction_status': 'failed',
+                    'error': 'File not found'
+                }
             if not pdf_path.lower().endswith('.pdf'):
                 logger.error(f"This is unsupported file format: {pdf_path}")
-                return None
+                return {
+                    'full_text': '',
+                    'page_texts': [],
+                    'page_count': 0,
+                    'char_count': 0,
+                    'file_name': Path(pdf_path).name,
+                    'extraction_status': 'failed',
+                    'error': 'Unsupported file format'
+                }
             doc = fitz.open(pdf_path)
             #initialize variables for text extraction
             full_text = ""

@@ -78,6 +78,49 @@ def test_all_resumes():
     print("TEST SUMMARY")
     print("=" * 60)
 
+    print("\nDisk Method Results:")
+    for test_name, success in disk_results: 
+        if success: 
+            status = "Pass"
+        else: 
+            status = "Fail"
+        print(f"{test_name}: {status}")
+
+    print("\nBytes Method Results: ")
+    for test_name, success in bytes_results: 
+        if success: 
+            status = "Pass"
+        else: 
+            status = "Fail"
+        print(f"{test_name}: {status}")
+
+    #compile overall stats!!
+    disk_passed = 0
+    for test_name, success in disk_results: 
+        if success: 
+            disk_passed += 1
+
+    bytes_passed = 0
+    for test_name, success in bytes_results: 
+        if success: 
+            bytes_passed += 1 
+
+if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+    test_all_resumes()
+    #name = name of module (e.x. src.parser.pdf_extractor)
+    #levelname = severity level of warning:
+    #DEBUG (lowest priority)
+    #INFO
+    #WARNING
+    #ERROR
+    #CRITICAL (highest priority))
+
+    
+
 
 
 

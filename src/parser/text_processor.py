@@ -18,6 +18,7 @@ class TextProcessor:
             'may', 'might', 'must', 'can', 'shall', 'this', 'that', 'these', 'those'
         }
         #common resume formatting artifacts to clean
+        #r denotes raw string 
         self.formatting_artifacts = {
             r'•\s*',  # Bullet points
             r'○\s*',  # Hollow bullets
@@ -28,4 +29,11 @@ class TextProcessor:
             r'\f',  # Form feed characters
             r'\r',  # Carriage returns
         }
+        #compile regex patterns for performance 
+        self.compiled_artifacts = []
+        for pattern in self.formatting_artifacts: 
+            compiled_pattern = re.compile(pattern, re.MULTILINE)
+            self.compiled_artifacts.append(compiled_pattern)
+
+
 

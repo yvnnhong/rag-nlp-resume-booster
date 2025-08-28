@@ -48,9 +48,9 @@ def test_single_resume_file_bytes(extractor, file_path, test_name):
 def test_all_resumes():
     extractor = PDFExtractor()
     test_files = [
-        ("../../data/sample_resumes/standard_1pg_resume.pdf", "Standard 1-Page Resume"),
-        ("../../data/sample_resumes/long_resume_6pgs.pdf", "Long 6-Page Resume"),
-        ("../../data/sample_resumes/sparse_resume.pdf", "Sparse 1-Page Resume")
+        ("data/sample_resumes/standard_1pg_resume.pdf", "Standard 1-Page Resume"),
+        ("data/sample_resumes/long_resume_6pgs.pdf", "Long 6-Page Resume"),
+        ("data/sample_resumes/sparse_resume.pdf", "Sparse 1-Page Resume")
     ]
     disk_results = []
     bytes_results = []

@@ -1,3 +1,4 @@
+#to test: run python tests/test_parser/test_pdf_extractor.py in the powershell terminal 
 import logging
 import sys
 sys.path.append('.')

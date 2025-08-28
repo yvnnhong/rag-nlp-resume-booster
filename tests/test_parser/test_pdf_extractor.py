@@ -1,6 +1,8 @@
 import logging
 import sys
-sys.path.append('../../src') #go up two levels 
+#old one that didn't work: sys.path.append('../../src')
+sys.path.append('../../') #go to project root -- need to fix this later
+#^that still doens't work -- debug this later ASAP (filepaths issue)
 from src.parser.pdf_extractor import PDFExtractor
 
 def test_single_resume_file_disk(extractor, file_path, test_name):

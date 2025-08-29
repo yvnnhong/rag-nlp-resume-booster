@@ -1,7 +1,7 @@
 #text_processor.py is step 2 for cleaning and normalizing the text 
 #we want to clean and normalize the raw extracted text before trying to parse 
 #sections from it 
-import re #for regex
+import re #for regex (re = regular expression)
 import string 
 import logging 
 from typing import Dict, List, Optional, Any
@@ -30,6 +30,8 @@ class TextProcessor:
             r'\r',  # Carriage returns
         }
         #compile regex patterns for performance 
+        #note: (pattern, re.MULTILINE) -> "look for this pattern @ the beginning of EVERY line",
+        #not just the start of the text block 
         self.compiled_artifacts = []
         for pattern in self.formatting_artifacts: 
             compiled_pattern = re.compile(pattern, re.MULTILINE)

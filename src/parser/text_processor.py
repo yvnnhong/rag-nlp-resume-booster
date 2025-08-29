@@ -44,9 +44,34 @@ class TextProcessor:
             if not raw_text or not raw_text.strip(): 
                 return self._empty_result("Empty input text. Unable to process")
             #initiate 6-step text processing pipeline! 
+            #step 1: basic cleaning 
             cleaned_text = self._basic_clean(raw_text)
+            #step 2: remove formatting artifacts 
             deformatted_text = self._remove_formatting_artifacts(cleaned_text)
-            #next 
+            #step 3: normalize whitespace and structure 
+            normalized_text = self._normalize_structure(deformatted_text)
+            #step 4: extract and clean individual words 
+            words = self._extract_words(normalized_text)
+            cleaned_words = self._clean_words(words)
+            #step 5: generate processsed versions 
+            processed_versions = self._generate_versions(normalized_text, cleaned_words)
+            #step 6: calculate text statistics 
+            stats = self._calculate_stats(raw_text, normalized_text, cleaned_words)
+            result = {
+                'original_text': raw_text,
+                'cleaned_text': normalized_text,
+                'processed_versions': processed_versions,
+                'words': cleaned_words, 
+                'stats': stats,
+                'processing_status': 'success'
+            }
+            logger.info(f"Text processing successful. Original: {len(raw_text)} chars, " 
+                        f"\nCleaned: {len(normalized_text)} chars")
+            return result 
+
+
+
+    #note- underscore prefix denotes a private method 
 
 
 

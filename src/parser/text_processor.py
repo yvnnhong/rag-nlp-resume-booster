@@ -84,6 +84,8 @@ class TextProcessor:
                 'error': str(e)
             }
     
+    #note- underscore prefix denotes a private method 
+
     #perform basic text cleaning 
     def _basic_clean(self, text: str) -> str: 
         #normalize unicode characters 
@@ -154,27 +156,9 @@ class TextProcessor:
     
     #extract individual words from text 
     def _extract_words(self, text: str) -> List[str]:
+
+        return None #remove this later 
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    #note- underscore prefix denotes a private method 
-
-
 
 
 

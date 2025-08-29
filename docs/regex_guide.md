@@ -40,6 +40,28 @@ The square brackets in regex [] contains a list of stuff that you want to match.
 Example: [ \t]{2,} means to match 2 or more consecutive characters, and each 
 character must be either a space or a tab. Note the intentional space. 
 
+## Notes on Capturing Groups 
+In regex, group numbering starts at 1, not 0. 
+- group 0 always refers to the entire matched substring.
+- group 1 is the first captured group (the stuff inside the first set of parentheses).
+- group 2 is the second captured group, and so on.
+
+Example 1: 
+pattern = r'([,.;:!?])([,.;:!?]+)'
+match = re.match(pattern, '!!!')
+group(0) → '!!!' (whole match)
+group(1) → '!' (first punctuation)
+group(2) → '!!' (the following repeated punctuation)
+
+Example 2: 
+```
+pattern = r'([a-z]+)(\d+)'
+```
+When we match this against the string "abc123", we get: 
+- group 1 captures "abc" (letters)
+- group 2 captures "123" (digits)
+
+
 
 
 

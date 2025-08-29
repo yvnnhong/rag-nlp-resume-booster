@@ -90,6 +90,25 @@ class TextProcessor:
         #'NFKD' = compatibility decomposition (break chars down into their basic parts)
         #^(e.x. The character “é” can be decomposed into “e” + “´” (accent).)
         text = unicodedata.normalize('NFKD', text)
+        #remove null bytes and other control characters 
+        new_text_chars = []
+        for char in text: 
+            #ord(char) gets the unicode code point of the char 
+            code_point = ord(char)
+            #the stuff below 32 isn't printable (controls)
+            #code 10 = "\n"; code 9 = "\t" --we want these 
+            if code_point >= 32 or char == '\n' or char == '\t':
+                new_text_chars.append(char)
+        text = ''.join(new_text_chars)
+        #fix word breaks and hyphenated words across newlines 
+        text = re.sub(r'(\w)-\s*\n\s*(\w)', r'\1\2', text) #fix hyphenated line breaks 
+        text = re.sub(r'(\w)\s*\n\s*(\w)', r'\1 \2', text) #fix word breaks across lines 
+        return text 
+    
+    def _remove_formatting_artifacts(self, text: str) -> str: 
+        
+
+
 
 
 

@@ -18,7 +18,7 @@ class TextProcessor:
             'may', 'might', 'must', 'can', 'shall', 'this', 'that', 'these', 'those'
         }
         #common resume formatting artifacts to clean
-        #r denotes raw string 
+        #r denotes raw string literal
         self.formatting_artifacts = {
             r'•\s*',  # Bullet points
             r'○\s*',  # Hollow bullets
@@ -31,11 +31,25 @@ class TextProcessor:
         }
         #compile regex patterns for performance 
         #note: (pattern, re.MULTILINE) -> "look for this pattern @ the beginning of EVERY line",
-        #not just the start of the text block 
+        #not just  at the start of the text block 
         self.compiled_artifacts = []
         for pattern in self.formatting_artifacts: 
             compiled_pattern = re.compile(pattern, re.MULTILINE)
             self.compiled_artifacts.append(compiled_pattern)
+
+    #main text processing pipeline
+    #raw_text = raw extracted text from pdf 
+    def process_text(self, raw_text: str) -> Dict[str, Any]:
+        try: 
+            if not raw_text or not raw_text.strip(): 
+                return self._empty_result("Empty input text. Unable to process")
+            #initiate 6-step text processing pipeline! 
+            cleaned_text = self._basic_clean(raw_text)
+            deformatted_text = self._remove_formatting_artifacts(cleaned_text)
+            #next 
+
+
+
 
 
 

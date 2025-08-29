@@ -117,11 +117,13 @@ class TextProcessor:
 
         #remove excessive punctuation
         #1) replace 3 or more periods with just 3 periods. [.] denotes the period character class
+        #note: the period is special (it is a wildcard that can match any character)
+        #so we have to escape it either using \. or w a charater class like [.]
         text = re.sub(r'[.]{3,}', '...', text)
         #2) replace 3 or more hyphens with just 3 hyphens. [-] denotes the hyphen character class
-        text = re.sub(r'[-]{3,}', '---', text)
+        text = re.sub(r'-{3,}', '---', text)
         #3) replace 3 or more underscores with just 3 underscores. ^^
-        text = re.sub(r'[_]{3,}', '___', text)
+        text = re.sub(r'_{3,}', '___', text)
 
         #remove page numbers and headers/footers
         #Note: uses bitwise OR to combine multiple flags. 
@@ -129,7 +131,10 @@ class TextProcessor:
         text = re.sub(r'^\s*\d+\s*/\s*\d+\s*$', '', text, flags=re.MULTILINE)
         return text 
     
+    #Normalize whitespace and text structure 
     def _normalize_structure(self, text: str) -> str: 
+        if not text: 
+            return ""
         
 
 

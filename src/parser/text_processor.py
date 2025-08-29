@@ -18,7 +18,7 @@ class TextProcessor:
             'may', 'might', 'must', 'can', 'shall', 'this', 'that', 'these', 'those'
         }
         #common resume formatting artifacts to clean
-        #r denotes raw string literal
+        #r denotes raw string literal -- don't read escape sequences; just read it LITERALLY
         self.formatting_artifacts = {
             r'•\s*',  # Bullet points
             r'○\s*',  # Hollow bullets

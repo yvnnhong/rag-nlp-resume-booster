@@ -138,7 +138,25 @@ class TextProcessor:
         #normalize line breaks 
         text = re.sub(r'\n{3,}', '\n\n', text) #max 2 consecutive newlines 
         text = re.sub(r'\n\s+\n', '\n\n', text) #remove whitespace-only lines 
+
+        #normalize spacing 
+        text = re.sub(r'[ \t]{2,}', ' ', text) #multiple spaces to single space 
+        text = re.sub(r'[ \t]*\n[ \t]*', '\n', text) #remove spaces below and above newlines
         
+        #normalize punctuation spacing 
+        text = re.sub(r'\s+([,.;:!?])', r'\1', text) #remove space before punctuation
+        text = re.sub(r'([,.;:!?])\s*', r'\1 ', text) #ensure space after punctuation
+
+        #remove duplicate punctuation/collapse repeated or mixed punctuation into one
+        text = re.sub(r'([,.;:!?])([,.;:!?])', r'\1', text)
+        
+        return text.strip()
+    
+    #extract individual words from text 
+    def _extract_words(self, text: str) -> List[str]:
+        
+
+
 
 
 

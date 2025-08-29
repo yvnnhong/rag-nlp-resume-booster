@@ -156,6 +156,10 @@ class TextProcessor:
     
     #extract individual words from text 
     def _extract_words(self, text: str) -> List[str]:
+        if not text:
+            return []
+        #extract words (including hyphenated words and acronyms)
+        
 
         return None #remove this later 
         

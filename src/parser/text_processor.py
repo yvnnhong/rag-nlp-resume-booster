@@ -68,6 +68,27 @@ class TextProcessor:
             logger.info(f"Text processing successful. Original: {len(raw_text)} chars, " 
                         f"\nCleaned: {len(normalized_text)} chars")
             return result 
+        except Exception as e: 
+            logger.error(f"Error processing text: {str(e)}")
+            if raw_text: 
+                original_text = raw_text
+            else: 
+                original_text = ''
+            return {
+                'original_text': original_text,
+                'cleaned_text': '',
+                'processed_versions': {},
+                'words': [], 
+                'stats': {},
+                'processing_status': 'failed',
+                'error': str(e)
+            }
+    
+    #perform basic text cleaning 
+    def _basic_clean(self, text: str) -> str: 
+        
+
+
 
 
 

@@ -86,7 +86,11 @@ class TextProcessor:
     
     #perform basic text cleaning 
     def _basic_clean(self, text: str) -> str: 
-        
+        #normalize unicode characters 
+        #'NFKD' = compatibility decomposition (break chars down into their basic parts)
+        #^(e.x. The character “é” can be decomposed into “e” + “´” (accent).)
+        text = unicodedata.normalize('NFKD', text)
+
 
 
 

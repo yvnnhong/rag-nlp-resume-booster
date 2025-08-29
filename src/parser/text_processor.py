@@ -105,8 +105,18 @@ class TextProcessor:
         text = re.sub(r'(\w)\s*\n\s*(\w)', r'\1 \2', text) #fix word breaks across lines 
         return text 
     
+    #remove common resume formatting artifacts e.x. bullet points, excessive punctuation,
+    #page numbers, etc. 
     def _remove_formatting_artifacts(self, text: str) -> str: 
-        
+        #return an empty string if input text is None, "", or otherwise empty 
+        if not text:
+            return ""
+        #remove bullet points and formatting (replace w/ empty string)
+        for pattern in self.compiled_artifacts: 
+            text = pattern.sub('', text)
+
+
+
 
 
 

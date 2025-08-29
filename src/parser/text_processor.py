@@ -135,6 +135,9 @@ class TextProcessor:
     def _normalize_structure(self, text: str) -> str: 
         if not text: 
             return ""
+        #normalize line breaks 
+        text = re.sub(r'\n{3,}', '\n\n', text) #max 2 consecutive newlines 
+        text = re.sub(r'\n\s+\n', '\n\n', text) #remove whitespace-only lines 
         
 
 

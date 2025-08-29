@@ -35,6 +35,10 @@ This includes:
 - Multiple spaces
 - Multiple tabs, newlines, etc. 
 
+## A note on character classes 
+The square brackets in regex [] contains a list of stuff that you want to match. 
+Example: [ \t]{2,} means to match 2 or more consecutive characters, and each 
+character must be either a space or a tab. Note the intentional space. 
 
 
 

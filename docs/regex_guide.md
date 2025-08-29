@@ -15,18 +15,22 @@ It can match:
 - A carriage return ('\r')
 - Any Unicode whitespace characters (like non-breaking spaces, etc)
 Example usage: 
+```
 re.match(r'\s', ' ')   # Match, because ' ' is a space
 re.match(r'\s', '\n')   # Match, because '\n' is a newline
 re.match(r'\s', '\t')   # Match, because '\t' is a tab
+```
 
 
 ### 2. \s+ means "one or more" whitespace characters
 \s+ matches one or more whitespace characters in a row (note the plus '+').
 It could be a single space or mulitple spaces, tabs, newlines, etc. 
 Example usage: 
+```
 re.match(r'\s+', '   ')   # Match, because there are 3 spaces
 re.match(r'\s+', '\n\t')  # Match, because there's a newline and tab
 re.match(r'\s+', ' \t\n') # Match, because there's one space, a tab, and a newline
+```
 
 ### 3. \s* means "zero or more" whitespace characters.
 This includes: 
@@ -37,7 +41,7 @@ This includes:
 
 ## A note on character classes 
 The square brackets in regex [] contains a list of stuff that you want to match. 
-Example: [ \t]{2,} means to match 2 or more consecutive characters, and each 
+Example: ```[ \t]{2,}``` means to match 2 or more consecutive characters, and each 
 character must be either a space or a tab. Note the intentional space. 
 
 ## Notes on Capturing Groups 
@@ -47,8 +51,11 @@ In regex, group numbering starts at 1, not 0.
 - group 2 is the second captured group, and so on.
 
 Example 1: 
+```
 pattern = r'([,.;:!?])([,.;:!?]+)'
 match = re.match(pattern, '!!!')
+```
+Here: 
 group(0) → '!!!' (whole match)
 group(1) → '!' (first punctuation)
 group(2) → '!!' (the following repeated punctuation)

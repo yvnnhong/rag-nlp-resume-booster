@@ -123,6 +123,16 @@ class TextProcessor:
         #3) replace 3 or more underscores with just 3 underscores. ^^
         text = re.sub(r'[_]{3,}', '___', text)
 
+        #remove page numbers and headers/footers
+        #Note: uses bitwise OR to combine multiple flags. 
+        text = re.sub(r'^\s*Page\s+\d+.*$', '', text, flags=re.MULTILINE | re.IGNORECASE)
+        text = re.sub(r'^\s*\d+\s*/\s*\d+\s*$', '', text, flags=re.MULTILINE)
+        return text 
+    
+    def _normalize_structure(self, text: str) -> str: 
+        
+
+
 
 
 

@@ -111,9 +111,19 @@ class TextProcessor:
         #return an empty string if input text is None, "", or otherwise empty 
         if not text:
             return ""
-        #remove bullet points and formatting (replace w/ empty string)
+        #remove bullet points and formatting (replace w/ empty string aka delete them)
         for pattern in self.compiled_artifacts: 
             text = pattern.sub('', text)
+
+        #remove excessive punctuation
+        #1) replace 3 or more periods with just 3 periods. [.] denotes the period character class
+        text = re.sub(r'[.]{3,}', '...', text)
+        #2) replace 3 or more hyphens with just 3 hyphens. [-] denotes the hyphen character class
+        text = re.sub(r'[-]{3,}', '---', text)
+        #3) replace 3 or more underscores with just 3 underscores. ^^
+        text = re.sub(r'[_]{3,}', '___', text)
+
+
 
 
 

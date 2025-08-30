@@ -160,11 +160,8 @@ class TextProcessor:
             return []
         #extract words (including hyphenated words and acronyms)
         word_pattern = r'\b[a-zA-Z]+(?:[-\'][a-zA-Z]+)*\b|\b[A-Z]{2,}\b|\b\w+\b'
-        
-        
-        
-
-        return None #remove this later 
+        words = re.findall(word_pattern, text)
+        return words
         
 
 

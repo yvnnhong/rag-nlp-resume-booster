@@ -162,6 +162,27 @@ class TextProcessor:
         word_pattern = r'\b[a-zA-Z]+(?:[-\'][a-zA-Z]+)*\b|\b[A-Z]{2,}\b|\b\w+\b'
         words = re.findall(word_pattern, text)
         return words
+
+    #clean and filter word list 
+    def _clean_words(self, words: List[str]) -> List[str]:
+        if not words:
+            return []
+        cleaned = []
+        for word in words: 
+            clean_word = word.lower().strip()
+            if not clean_word: #skip empty words 
+                continue 
+            if len(clean_word) == 1 and clean_word not in {'c', 'r', 'a', 'i'}: 
+                continue 
+            if clean_word.isdigit(): #skip pure numbers 
+                continue 
+            if clean_word in self.resume_stopwords and not self._is_technical_term(clean_word): 
+                continue
+        pass #remove this later -- first do technical words!!! 
+
+    def _is_technical_term(self, word: str) -> bool: 
+     
+    
         
 
 

@@ -180,7 +180,18 @@ class TextProcessor:
                 continue
         pass #remove this later -- first do technical words!!! 
 
+    
+    #helper method to check to see if a word is likely a technical term that we want to preserve 
+    #note: we have to expand this definition later(add the list to /data)
+    #this entire function is probably gonna be refactored later 
     def _is_technical_term(self, word: str) -> bool: 
+        technical_indicators = [
+            len(word) > 2 and word.isupper(), #e.x. acronymns like SQL, API 
+            any(char.isdigit() for char in word), #version numbers like C#, HTML5
+            word in {'c', 'r', 'go', 'rust'} #programming languages 
+        ]
+        return any(technical_indicators) #checks if any of these conditions are true 
+
      
     
         

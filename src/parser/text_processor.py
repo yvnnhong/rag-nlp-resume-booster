@@ -184,6 +184,8 @@ class TextProcessor:
     #helper method to check to see if a word is likely a technical term that we want to preserve 
     #note: we have to expand this definition later(add the list to /data)
     #this entire function is probably gonna be refactored later 
+    #REFACTOR THISSS LATERRRRRRRR DONT FORGETTTT
+    #note: technical_indicators looks something like [True, False, False] -- a list of bools
     def _is_technical_term(self, word: str) -> bool: 
         technical_indicators = [
             len(word) > 2 and word.isupper(), #e.x. acronymns like SQL, API 

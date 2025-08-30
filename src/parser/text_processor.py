@@ -159,6 +159,9 @@ class TextProcessor:
         if not text:
             return []
         #extract words (including hyphenated words and acronyms)
+        word_pattern = r'\b[a-zA-Z]+(?:[-\'][a-zA-Z]+)*\b|\b[A-Z]{2,}\b|\b\w+\b'
+        
+        
         
 
         return None #remove this later 

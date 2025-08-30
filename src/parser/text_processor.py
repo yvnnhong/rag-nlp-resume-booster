@@ -178,8 +178,8 @@ class TextProcessor:
                 continue 
             if clean_word in self.resume_stopwords and not self._is_technical_term(clean_word): 
                 continue
-        pass #remove this later -- first do technical words!!! 
-
+            cleaned.append(word)
+        return cleaned 
     
     #helper method to check to see if a word is likely a technical term that we want to preserve 
     #note: we have to expand this definition later(add the list to /data)

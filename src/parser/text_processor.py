@@ -251,6 +251,7 @@ class TextProcessor:
             'sentence_count': 0, #placeholder (gets computed later in this function)
             'line_count': 0 #placeholder (gets computed later in this function)
         }
+        
 
         pass #temp 
 

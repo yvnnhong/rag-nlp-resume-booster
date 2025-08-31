@@ -210,6 +210,14 @@ class TextProcessor:
         z: characters to delete 
         here we're just deleting the punctuation. not replacing anything with anything 
         '''
+        versions['no_punctuation'] = cleaned_text.translate(translator)
+        #sentences (split on sentence boundaries)
+        sentences = re.split(r'[.!?]+\s+', cleaned_text)
+        stripped_sentences = []
+        for s in sentences: 
+            if s.strip(): 
+                stripped_sentences.append(s.strip())
+        versions['sentences'] = stripped_sentences
 
 
      

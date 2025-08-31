@@ -225,6 +225,10 @@ class TextProcessor:
         unique_words = list(set(lower_words))
         versions['unique_keywords'] = sorted(unique_words) #sort alphabetically
         return versions 
+    
+    #calculate + return text processing stats 
+    def _calculate_stats(self, original: str, cleaned: str, words: List[str]) -> Dict[str, Any]: 
+        pass #temp 
 
 
 

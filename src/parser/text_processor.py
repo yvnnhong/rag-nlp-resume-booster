@@ -251,10 +251,18 @@ class TextProcessor:
             'sentence_count': 0, #placeholder (gets computed later in this function)
             'line_count': 0 #placeholder (gets computed later in this function)
         }
-        
+        #do rest of it tmw 
 
         pass #temp 
 
+'''
+important notes: 
+-the removal of duplicate words may backfire, since many ATS systems prioritize resumes 
+(score these resumes higher) if they repeat important keywords in the job description
+-todo: add a feature that lets the user drop in the job description, and then we can score 
+their resume against that specific job description
+(use counter or collections.defaultdict to track frequencies???)
+'''
 
 
      

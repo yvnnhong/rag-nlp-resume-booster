@@ -228,6 +228,13 @@ class TextProcessor:
     
     #calculate + return text processing stats 
     def _calculate_stats(self, original: str, cleaned: str, words: List[str]) -> Dict[str, Any]: 
+        stats = {
+            'original_length': len(original) if original else 0, 
+            'cleaned_length': len(cleaned) if cleaned else 0,
+            'compression_ratio': 0, 
+            'word_count': len(words),
+            'unique_word_count': 
+        }
         pass #temp 
 
 

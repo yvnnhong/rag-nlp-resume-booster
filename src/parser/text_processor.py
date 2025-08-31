@@ -218,6 +218,14 @@ class TextProcessor:
             if s.strip(): 
                 stripped_sentences.append(s.strip())
         versions['sentences'] = stripped_sentences
+        #keywords (unique words, case-insensitive - get rid of duplicate words)
+        lower_words = []
+        for word in words: 
+            lower_words.append(word)
+        unique_words = list(set(lower_words))
+        versions['unique_keywords'] = sorted(unique_words)
+        return versions 
+
 
 
      

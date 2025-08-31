@@ -236,7 +236,11 @@ class TextProcessor:
             cleaned_length = len(cleaned)
         else: 
             cleaned_length = 0
-
+        lowercased_words = []
+        for word in words: 
+            lowercased_words.append(word.lower())
+        unique_word_count = len(set(lowercased_words))
+        
         stats = {
             'original_length': len(original) if original else 0, 
             'cleaned_length': len(cleaned) if cleaned else 0,

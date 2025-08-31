@@ -228,6 +228,9 @@ class TextProcessor:
     
     #calculate + return text processing stats 
     def _calculate_stats(self, original: str, cleaned: str, words: List[str]) -> Dict[str, Any]: 
+        if original: #if original is non-empty 
+            original_length = len(original)
+            
         stats = {
             'original_length': len(original) if original else 0, 
             'cleaned_length': len(cleaned) if cleaned else 0,

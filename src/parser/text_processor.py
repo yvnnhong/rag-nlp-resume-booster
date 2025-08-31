@@ -192,7 +192,20 @@ class TextProcessor:
             any(char.isdigit() for char in word), #version numbers like C#, HTML5
             word in {'c', 'r', 'go', 'rust'} #programming languages 
         ]
-        return any(technical_indicators) #checks if any of these conditions are true 
+        return any(technical_indicators) #checks if any of these conditions are true
+
+    #generate different processed versions of the text 
+    def _generate_versions(self, cleaned_text: str, words: List[str]) -> Dict[str, str]: 
+        versions = {}
+        #all-lowercase version 
+        versions['lowercase'] = cleaned_text.lower()
+        #Words only (space-separated)
+        versions['words_only'] = ' '.join(words)
+        #no punctuation marks version
+        translator = str.maketrans('', '', string.punctuation) #create translator object 
+        '''
+        '''
+
 
      
     

@@ -240,13 +240,16 @@ class TextProcessor:
         for word in words: 
             lowercased_words.append(word.lower())
         unique_word_count = len(set(lowercased_words))
-        
+
         stats = {
-            'original_length': len(original) if original else 0, 
-            'cleaned_length': len(cleaned) if cleaned else 0,
+            'original_length': original_length,
+            'cleaned_length': cleaned_length,
             'compression_ratio': 0, 
             'word_count': len(words),
-            'unique_word_count': 
+            'unique_word_count': unique_word_count,
+            'avg_word_length': 0,
+            'sentence_count': 0,
+            'line_count': 0
         }
         pass #temp 
 

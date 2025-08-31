@@ -204,6 +204,11 @@ class TextProcessor:
         #no punctuation marks version
         translator = str.maketrans('', '', string.punctuation) #create translator object 
         '''
+        ^note: str.maketrans(x, y, z)
+        x: characters to replace 
+        y: what to replace them with 
+        z: characters to delete 
+        here we're just deleting the punctuation. not replacing anything with anything 
         '''
 
 

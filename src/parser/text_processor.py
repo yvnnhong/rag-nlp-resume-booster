@@ -221,9 +221,9 @@ class TextProcessor:
         #keywords (unique words, case-insensitive - get rid of duplicate words)
         lower_words = []
         for word in words: 
-            lower_words.append(word)
+            lower_words.append(word.lower())
         unique_words = list(set(lower_words))
-        versions['unique_keywords'] = sorted(unique_words)
+        versions['unique_keywords'] = sorted(unique_words) #sort alphabetically
         return versions 
 
 

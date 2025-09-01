@@ -251,7 +251,10 @@ class TextProcessor:
             'sentence_count': 0, #placeholder (gets computed later in this function)
             'line_count': 0 #placeholder (gets computed later in this function)
         }
-        #do rest of it tmw 
+        if stats['original_length'] > 0: 
+            stats['compression_ratio'] = 1 - (stats['cleaned_length'] / stats['original_length'])
+        if words: 
+            stats[]
 
         pass #temp 
 

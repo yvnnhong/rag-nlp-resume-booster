@@ -253,8 +253,16 @@ class TextProcessor:
         }
         if stats['original_length'] > 0: 
             stats['compression_ratio'] = 1 - (stats['cleaned_length'] / stats['original_length'])
-        if words: 
-            stats[]
+        total_length = 0 
+        for word in words: 
+            total_length += len(word)
+        word_count = len(words)
+        if word_count > 0: 
+            avg_length = total_length / word_count
+            stats['avg_word_length'] = avg_length
+        #figure out number of sentences by counting punctuation marks: 
+        
+        
 
         pass #temp 
 

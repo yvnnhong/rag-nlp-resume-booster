@@ -270,9 +270,23 @@ class TextProcessor:
                     line_count += 1
             stats['line_count'] = line_count
         return stats 
+     
+    #Returns an empty dict with an error message. 
+    def _empty_result(self, error_msg_reason: str) -> Dict[str, Any]: 
+        return {
+            'original_text': '',
+            'cleaned_text': '',
+            'processed_versions': {},
+            'words': [],
+            'stats': {},
+            'processing_status': 'failed',
+            'error': error_msg_reason
+        }
     
-    def _empty_result(self, reason: str) -> Dict[str, Any]: 
+    def get_processing_summary(self, result: Dict[str, Any]) -> str: 
         pass 
+
+        
 
 
 

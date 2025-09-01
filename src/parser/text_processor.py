@@ -261,10 +261,22 @@ class TextProcessor:
             avg_length = total_length / word_count
             stats['avg_word_length'] = avg_length
         #figure out number of sentences by counting punctuation marks: 
-        
-        
+        if cleaned: 
+            stats['sentence_count'] = len(re.findall(r'[.!?]+', cleaned))
+            line_count = 0
+            lines = cleaned.split('\n')
+            for line in lines: 
+                if line.strip(): #only count non-empty lines 
+                    line_count += 1
+            stats['line_count'] = line_count
+        return stats 
+    
+    def _empty_result(self, reason: str) -> Dict[str, Any]: 
+        pass 
 
-        pass #temp 
+
+
+
 
 '''
 important notes: 

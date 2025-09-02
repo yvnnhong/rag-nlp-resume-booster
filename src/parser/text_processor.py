@@ -283,6 +283,7 @@ class TextProcessor:
             'error': error_msg_reason
         }
     
+    #this is for use in tests/test_parser/test_text_processor.py
     def get_processing_summary(self, result: Dict[str, Any]) -> Dict[str, Any]: 
         if result['processing_status'] != 'success': 
             return f"Processing failed: {result.get('error', 'Unknown')}"

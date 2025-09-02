@@ -13,6 +13,11 @@ def test_text_processing_from_files():
     print("=" * 60)
     test_processor = TextProcessor()
     pdf_extractor = PDFExtractor()
+    test_files = [
+        (""),
+        (""),
+        ("")
+    ]
     pass #temp 
 
 

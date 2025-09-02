@@ -121,10 +121,18 @@ def test_text_processing_edge_cases() -> None:
     else: 
         print(f"Single-word text failed: {result.get('error', 'Unknown error')}")
 
+    #Testing text with only special characters: 
+    print("\nTesting special characters only: ")
+    result = text_processor.process_text("!@#$%^&*()_+{|}:<>?")
+    if result['processing_status'] == 'success':
+        summary = text_processor.get_processing_summary(result)
+        print(f"Special chars processed: {summary['word_count']} words extracted")
+    else: 
+        print(f"Special chars failed: {result.get('error', 'Unknown error')}")
 
+def test_specific_features() -> None: 
     
-    
-
+    pass
 
 if __name__ == "__main__":
     # Configure logging

@@ -23,10 +23,28 @@ def test_single_file_text_processing(pdf_extractor, text_processor, file_path, t
         if processing_result['processing_status'] == 'success': 
             print("Test processing is successful.")
             summary = text_processor.get_processing_summary(processing_result)
-            
-        
+            print(f"Original length: {summary['original_length']} chars")
+            print(f"Cleaned length: {summary['cleaned_length']} chars")
+            print(f"Compression percentage: {summary['compression_percentage']}")
+            print(f"Total number of words: {summary['word_count']}")
+            print(f"Unique word count: {summary['unique_word_count']}")
+            print(f"Average word length: {summary['avg_word_length']} chars")
+            print(f"Sentences: {summary['sentence_count']}")
+            print(f"Total number of lines: {summary['line_count']}")
+
+            #show text preview 
+            cleaned_preview = processing_result['cleaned_text'][:200].replace('\n', ' ')
+            print(f"Cleaned text preview: {cleaned_preview}...")
+            #show word extraction sample (first 10 words)
+            words_sample = processing_result['words'][:10]
+            print(f"Sample words extracted: {words_sample}")
+            return True
+        else: 
+            print(f"Text processing failed: {processing_result.get('error', 'Unknown error')}")
+            return False
     except Exception as e: 
-        pass #temp
+        print(f"Text processing failed: {processing_result.get('error', 'Unknown error')}")
+        return False
 
 #Test text processing using all pdf files from root/data/sample_resumes
 def test_text_processing_all_pdfs_sample_resumes():

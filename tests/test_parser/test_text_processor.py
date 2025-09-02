@@ -1,10 +1,8 @@
-'''
-This file, test_text_processor.py, tests text_processor.py.
-To run this file, ensure you are in the project root (ensure you are 
-using powershell for windows):
-cd C:\Users\yvonn\rag-nlp-resume-booster
-python tests/test_parser/test_text_processor.py
-'''
+#This file, test_text_processor.py, tests text_processor.py.
+#To run this file, ensure you are in the project root (ensure you are 
+#using powershell for windows):
+#cd C:\Users\yvonn\rag-nlp-resume-booster
+#python tests/test_parser/test_text_processor.py
 import logging
 import sys
 sys.path.append('.')

@@ -52,9 +52,9 @@ def test_single_file_text_processing(
         return False
 
 #Test text processing using all pdf files from root/data/sample_resumes
-def test_text_processing_all_pdfs_sample_resumes():
+def test_text_processing_all_pdfs_sample_resumes() -> None:
     print("=" * 60)
-    print("Testing text processing from PDF files.")
+    print("Testing text_processor.py using all disk PDF files.")
     print("=" * 60)
     text_processor = TextProcessor()
     pdf_extractor = PDFExtractor()
@@ -88,16 +88,11 @@ def test_text_processing_all_pdfs_sample_resumes():
     total_tests = len(test_files)
     print(f"\nOverall passed: {passed}/{total_tests} files processed successfully.")
 
-#try a test wiht really messy sample...?!
-def test_text_processing_with_messy_sample(): 
-    pass 
-
-
-    
-
-
-
-    pass #temp 
+#try testing with edge cases (sanity check hehe)
+def test_text_processing_edge_cases(): 
+    print("=" * 60)
+    print("Testing text_processor.py with edge cases.")
+    print("=" * 60)
 
 
 

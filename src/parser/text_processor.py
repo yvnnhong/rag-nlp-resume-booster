@@ -283,14 +283,23 @@ class TextProcessor:
             'error': error_msg_reason
         }
     
-    def get_processing_summary(self, result: Dict[str, Any]) -> str: 
-        pass 
-
-        
-
-
-
-
+    def get_processing_summary(self, result: Dict[str, Any]) -> Dict[str, Any]: 
+        if result['processing_status'] != 'success': 
+            return f"Processing failed: {result.get('error', 'Unknown')}"
+        stats = result['stats']
+        summary = {
+            'status': 'success',
+            'original_length': stats['original_length'],
+            'cleaned_length': stats['cleaned_length'],
+            'compression_ratio': round(stats['cleaned_length'], 3),
+            'word_count': stats['word_count'],
+            'unique_word_count': stats['unique_word_count'],
+            'avg_word_length': round(stats['avg_word_length'], 1),
+            'sentence_count': stats['sentence_count'],
+            'line_count': stats['line_count'],
+            'compression_percentage': f"{stats['compression_ratio']:.1%}"
+        }
+        return summary
 
 '''
 important notes: 

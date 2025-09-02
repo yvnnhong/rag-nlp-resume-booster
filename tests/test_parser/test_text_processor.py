@@ -130,9 +130,23 @@ def test_text_processing_edge_cases() -> None:
     else: 
         print(f"Special chars failed: {result.get('error', 'Unknown error')}")
 
-def test_specific_features() -> None: 
-    
-    pass
+def test_bullet_point_removal() -> None: 
+    text_processor = TextProcessor()
+    print("\nTesting bullet point removal")
+    bullet_text = "• First item\n○ Second item\n▪ Third item\n- Fourth item"
+    result = text_processor.process_text(bullet_text)
+    if result['processing_status'] == 'success': 
+        print("Original:", repr(bullet_text))
+        print("Cleaned:", repr(result['cleaned_text']))
+
+def test_sentence_splitting() -> None: 
+    text_processor = TextProcessor()
+    print("\nTesting sentence splitting")
+    sentence_text = "I am a software engineer. I have 5 years of experience. I love Python!"
+    result = text_processor.process_text(sentence_text)
+    if result['processing_status'] == 'success': 
+        number_of_sentences = result['processed_versions']['sentences']
+        print(f"Number of sentences detected: {number_of_sentences}")
 
 if __name__ == "__main__":
     # Configure logging
@@ -140,7 +154,7 @@ if __name__ == "__main__":
         level=logging.INFO,
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
-    # Run the tests
+    # Run tests
     test_text_processing_all_pdfs_sample_resumes()
     test_text_processing_edge_cases()
 

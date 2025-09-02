@@ -145,7 +145,7 @@ def test_sentence_splitting() -> None:
     sentence_text = "I am a software engineer. I have 5 years of experience. I love Python!"
     result = text_processor.process_text(sentence_text)
     if result['processing_status'] == 'success': 
-        number_of_sentences = result['processed_versions']['sentences']
+        number_of_sentences = len(result['processed_versions']['sentences'])
         print(f"Number of sentences detected: {number_of_sentences}")
 
 if __name__ == "__main__":
@@ -157,6 +157,8 @@ if __name__ == "__main__":
     # Run tests
     test_text_processing_all_pdfs_sample_resumes()
     test_text_processing_edge_cases()
+    test_bullet_point_removal()
+    test_sentence_splitting()
 
 
 

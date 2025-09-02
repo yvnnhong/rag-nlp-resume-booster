@@ -1,4 +1,10 @@
-#test_text_processor.py is for testing src/parser/text_processor.py
+'''
+This file, test_text_processor.py, tests text_processor.py.
+To run this file, ensure you are in the project root (ensure you are 
+using powershell for windows):
+cd C:\Users\yvonn\rag-nlp-resume-booster
+python tests/test_parser/test_text_processor.py
+'''
 import logging
 import sys
 sys.path.append('.')
@@ -97,9 +103,12 @@ def test_text_processing_edge_cases() -> None:
     text_processor = TextProcessor()
     #1). Test empty text: 
     print("Testing empty text: ")
+    result = text_processor.process_text("")
+    print(f"Empty text result (aka empty string): {result['processing_status']}")
 
 
-
+#cd test/test_parser 
+#python test_text_processor.py
 
 
 

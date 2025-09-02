@@ -1,4 +1,10 @@
-#to test: run python tests/test_parser/test_pdf_extractor.py in the powershell terminal 
+'''
+This file, test_pdf_extractor.py, tests pdf_extractor.py.
+To run this file, ensure you are in the project root 
+(ensure you are using powershell for windows): 
+cd C:\Users\yvonn\rag-nlp-resume-booster
+python tests/test_parser/test_pdf_extractor.py
+'''
 import logging
 import sys
 sys.path.append('.')

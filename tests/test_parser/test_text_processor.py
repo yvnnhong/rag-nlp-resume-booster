@@ -56,7 +56,7 @@ def test_text_processing_all_pdfs_sample_resumes():
     print("=" * 60)
     print("Testing text processing from PDF files.")
     print("=" * 60)
-    test_processor = TextProcessor()
+    text_processor = TextProcessor()
     pdf_extractor = PDFExtractor()
     test_files = [
         ("data/sample_resumes/standard_1pg_resume.pdf", "Standard 1-Page Resume"),
@@ -65,7 +65,38 @@ def test_text_processing_all_pdfs_sample_resumes():
     ]
     results = []
     for file_path, file_test_name in test_files: 
-        success = 
+        success_status_bool = test_single_file_text_processing(
+            pdf_extractor, text_processor, file_path, file_test_name
+        )
+        results.append((file_test_name, success_status_bool))
+    #Summary
+    print("\n" + "=" * 60)
+    print("Results of testing text_processor.py: ")
+    print("\n" + "=" * 60)
+    print("\nResults: ")
+    for file_test_name, success_status_bool in results: 
+        if success_status_bool: 
+            status = "Pass"
+        else: 
+            status = "Fail"
+        print(f"{file_test_name}: {status} ")
+    #compute total number passed: 
+    passed = 0
+    for file_test_name, success_status_bool in results: 
+        if success_status_bool: 
+            passed += 1 
+    total_tests = len(test_files)
+    print(f"\nOverall passed: {passed}/{total_tests} files processed successfully.")
+
+#try a test wiht really messy sample...?!
+def test_text_processing_with_messy_sample(): 
+    pass 
+
+
+    
+
+
+
     pass #temp 
 
 

@@ -22,7 +22,8 @@ def test_single_file_text_processing(pdf_extractor, text_processor, file_path, t
         processing_result = text_processor.process_text(pdf_result['full_text'])
         if processing_result['processing_status'] == 'success': 
             print("Test processing is successful.")
-            summary = text_processor.get_summary
+            summary = text_processor.get_processing_summary(processing_result)
+            
         
     except Exception as e: 
         pass #temp

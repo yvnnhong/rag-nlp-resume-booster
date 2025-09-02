@@ -103,6 +103,27 @@ def test_text_processing_edge_cases() -> None:
     print("Testing empty text: ")
     result = text_processor.process_text("")
     print(f"Empty text result (aka empty string): {result['processing_status']}")
+    #2.) Test None input 
+    print("\nTesting None input: ")
+    result = text_processor.process_text(None)
+    print(f"None input result: {result['processing_status']}")
+    #3.) Test whitespace only: 
+    print("\nTesting whitespace-only text: ")
+    result = text_processor.process_text("   \n\n\t\t   ")
+    print(f"Whitespace-only result: {result['processing_status']}")
+
+    #Testing a single word + print out Dict processing results: 
+    print("Testing a single word: ")
+    result = text_processor.process_text("Hi.")
+    if result['processing_status'] == 'success': 
+        summary = text_processor.get_processing_summary(result)
+        print(f"Single-word text processed successfully: {summary['word_count']} words")
+    else: 
+        print(f"Single-word text failed: {result.get('error', 'Unknown error')}")
+
+
+    
+    
 
 
 if __name__ == "__main__":

@@ -284,6 +284,10 @@ class TextProcessor:
             'error': error_msg_reason
         }
     
+    # get_processing_summary
+    # Expects a result dictionary returned by the process_text method,
+    # containing keys like 'processing_status' and 'stats'.
+    # This method generates a summary based on that result.
     #this is for use in tests/test_parser/test_text_processor.py
     def get_processing_summary(self, result: Dict[str, Any]) -> Dict[str, Any]: 
         if result['processing_status'] != 'success': 

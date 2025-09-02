@@ -6,7 +6,12 @@ from src.parser.text_processor import TextProcessor
 from src.parser.pdf_extractor import PDFExtractor
 
 #test a single PDF file from root/data/sample_resumes
-def test_single_file_text_processing(pdf_extractor, text_processor, file_path, test_name): 
+def test_single_file_text_processing(
+        pdf_extractor: PDFExtractor,
+        text_processor: TextProcessor,
+        file_path: str,
+        test_name: str
+    ) -> bool: 
     print(f"\nTesting {test_name}: ")
     try: 
         #test pdf extraction: 
@@ -54,10 +59,13 @@ def test_text_processing_all_pdfs_sample_resumes():
     test_processor = TextProcessor()
     pdf_extractor = PDFExtractor()
     test_files = [
-        (""),
-        (""),
-        ("")
+        ("data/sample_resumes/standard_1pg_resume.pdf", "Standard 1-Page Resume"),
+        ("data/sample_resumes/long_resume_6pgs.pdf", "Long 6-Page Resume"),
+        ("data/sample_resumes/sparse_resume.pdf", "Sparse 1-Page Resume")
     ]
+    results = []
+    for file_path, file_test_name in test_files: 
+        success = 
     pass #temp 
 
 

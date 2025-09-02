@@ -293,7 +293,7 @@ class TextProcessor:
             'status': 'success',
             'original_length': stats['original_length'],
             'cleaned_length': stats['cleaned_length'],
-            'compression_ratio': round(stats['cleaned_length'], 3),
+            'compression_ratio': round(stats['compression_ratio'], 3),
             'word_count': stats['word_count'],
             'unique_word_count': stats['unique_word_count'],
             'avg_word_length': round(stats['avg_word_length'], 1),

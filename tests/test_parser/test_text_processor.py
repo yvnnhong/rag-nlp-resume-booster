@@ -22,7 +22,7 @@ def test_single_file_text_processing(
         pdf_result = pdf_extractor.extract_text_disk(file_path)
         if not pdf_result or pdf_result['extraction_status'] != 'success': 
             if pdf_result: 
-                error_message = pdf_result.get('error', 'Unknown error')
+                error_msg = pdf_result.get('error', 'Unknown error')
             else: 
                 error_msg = "No result"
             print(f"PDF extraction failed: {error_msg}.")
@@ -52,7 +52,7 @@ def test_single_file_text_processing(
             print(f"Text processing failed: {processing_result.get('error', 'Unknown error')}")
             return False
     except Exception as e: 
-        print(f"Text processing failed: {processing_result.get('error', 'Unknown error')}")
+        print(f"Test failed with error: {str(e)} ")
         return False
 
 #Test text processing using all pdf files from root/data/sample_resumes
@@ -105,8 +105,15 @@ def test_text_processing_edge_cases() -> None:
     print(f"Empty text result (aka empty string): {result['processing_status']}")
 
 
-#cd test/test_parser 
-#python test_text_processor.py
+if __name__ == "__main__":
+    # Configure logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+    # Run the tests
+    test_text_processing_all_pdfs_sample_resumes()
+    test_text_processing_edge_cases()
 
 
 

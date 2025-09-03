@@ -110,6 +110,22 @@ class SectionParser:
             }
             logger.info(f"Successfully parsed {len(parsed_sections)} sections")
             return result
-            
+        #exception 
         except Exception as e: 
-            return Dict[Any, Any] #temp 
+            logger.error(f"Error parsing resume sections: {str(e)}")
+            if resume_text: 
+                text_length = len(resume_text)
+            else: 
+                text_length = 0
+            return {
+                'sections': {},
+                'contact_info': {},
+                'total_sections': {},
+                'text_length': text_length,
+                'parsing_status': 'failed',
+                'error': str(e)
+            }
+        
+    def _clean_text(self, text: str) -> str: 
+        """Clean and normalize resume text."""
+        return ''

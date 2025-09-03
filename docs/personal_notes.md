@@ -11,6 +11,16 @@ Note: move everything in here into dev_notes.md
 In all of the test files, hardcode expected values to compare against the results of the tests,
 so the user/me doesn't have to manually verify whether or not the code in question passed the tests. If hardcoded value = tested value, then True. Else, False. Give a final number e.x. XX/15 if there were 15 tests to see how many "actually" passed (the actual passing number will be the number of Trues's)
 
+### 3. Third current to-do: add variable annotation/type hints to ALL dicts 
+Example: 
+```
+        self.section_patterns: Dict[str, List[str]] = {
+            'contact': [],
+            'summary': []
+            #...
+        }
+```
+
 ## Unresolved problems 
 # Problem 2: 
 This line in text_processor.py: 

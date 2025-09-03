@@ -6,9 +6,20 @@ from typing import Dict, List, Optional, Any
 logger = logging.getLogger(__name__)
 
 class ResumeSection: 
-    def __init__(self, name, content, start_index, end_index, confidence) -> None: 
+    """Data class to represent a parsed resume section."""
+    def __init__(self, name: str, content: str, start_index: int, end_index: int, 
+                 confidence: float) -> None: 
         self.name = name
         self.content = content
         self.start_index = start_index
         self.end_index = end_index
         self.confidence = confidence
+
+class SectionParser:
+    """Parse resume text into distinct sections."""
+    def __init__self(self): #Define common section headers and their variations.
+        self.section_patterns: Dict[str, List[str]] = {
+            'contact': [],
+            'summary': []
+            #...
+        }

@@ -140,11 +140,20 @@ class SectionParser:
     
     def _find_section_boundaries(self, text: str) -> List[Dict[str, Any]]: 
         """Step 2: find where each section starts in the text."""
-        matches = []
+        header_pattern_matches = []
         lines = text.split('\n')
         for line_idx, line in enumerate(lines): 
             line = line.strip()
             if not line: 
                 continue
             #Check if this line matches any section header pattern: 
-        return List[Dict[Any, Any]]
+            for section_name, patterns in self.compiled_patterns.items(): 
+                for pattern in patterns: 
+                    match = pattern.search(line)
+                    if match: 
+                        char_position = sum(len(lines[i]) + 1 for i in range(line_idx))
+                        header_pattern_matches.append({
+                            'section': section_name,
+                            'line_number': line_idx,
+                        })
+        return List[Dict[Any, Any]] #temp

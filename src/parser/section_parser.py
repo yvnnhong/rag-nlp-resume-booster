@@ -128,4 +128,16 @@ class SectionParser:
         
     def _clean_text(self, text: str) -> str: 
         """Clean and normalize resume text."""
-        return ''
+        if not text: 
+            return ""
+        #remove extra whitespace and normalize line breaks 
+        #re.sub(pattern, replacement, string)
+        text = re.sub(r'\s+', ' ', text)
+        text = re.sub(r'\n\s*\n', '\n\n', text)
+        #remove special chars that might interfere with parsing
+        text = re.sub(r'[^\w\s\n\.,;:()\-@/]', '', text)
+        return text.strip()
+    
+    def _find_section_boundaries(self, text: str) -> List[Dict[str, Any]]: 
+        """Find where each section starts in the text."""
+        return List[Dict[Any, Any]]

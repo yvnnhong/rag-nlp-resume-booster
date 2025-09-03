@@ -127,7 +127,7 @@ class SectionParser:
             }
         
     def _clean_text(self, text: str) -> str: 
-        """Clean and normalize resume text."""
+        """Step 1: Clean and normalize resume text."""
         if not text: 
             return ""
         #remove extra whitespace and normalize line breaks 
@@ -139,5 +139,12 @@ class SectionParser:
         return text.strip()
     
     def _find_section_boundaries(self, text: str) -> List[Dict[str, Any]]: 
-        """Find where each section starts in the text."""
+        """Step 2: find where each section starts in the text."""
+        matches = []
+        lines = text.split('\n')
+        for line_idx, line in enumerate(lines): 
+            line = line.strip()
+            if not line: 
+                continue
+            #Check if this line matches any section header pattern: 
         return List[Dict[Any, Any]]

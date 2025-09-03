@@ -54,7 +54,7 @@ class SectionParser:
                 r'skills?',
                 r'competencies',
                 r'technologies',
-                r'languages' #make a section for programming languages??? 
+                r'languages', #make a section for programming languages??? 
                 r'programming\s+languages?'
             ],
             'projects': [
@@ -78,3 +78,6 @@ class SectionParser:
         }
 
         #Compile regex patterns for improved performance
+        self.compiled_patterns = {}
+        for section, patterns in self.section_patterns.items(): 
+            self.compiled_patterns[section] = []

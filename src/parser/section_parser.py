@@ -149,7 +149,9 @@ class SectionParser:
             #Check if this line matches any section header pattern: 
             for section_name, patterns in self.compiled_patterns.items(): 
                 for pattern in patterns: 
-                    match = pattern.search(line)
+                    match = pattern.search(line) 
+                    #^.search() only the first occurrence of pattern, and stores it in match
+                    #^returns a Match object (re module has built in re.Match) or None.
                     if match: 
                         char_position = sum(len(lines[i]) + 1 for i in range(line_idx))
                         header_pattern_matches.append({

@@ -86,4 +86,30 @@ class SectionParser:
                 compiled_pattern = re.compile(pattern, re.IGNORECASE | re.MULTILINE)
                 self.compiled_patterns[section].append(compiled_pattern)
 
-    def parse_sections #finish thi later 
+    def parse_sections(self, resume_text: str) -> Dict[str, Any]: 
+        """
+        Parses resume text into sections. 
+        Args: resume_text (str): Full resume text 
+        Returns: dict: Parsed section w/ metadata 
+        """
+        try: 
+            #step 1: Clean text 
+            cleaned_text = self._clean_text(resume_text)
+            #step 2: find section boundaries 
+            section_matches = self._find_section_boundaries(cleaned_text)
+            #step 3: extract section content 
+            parsed_sections = self._extract_section_content(cleaned_text, section_matches)
+            #step 4: extract contact information (usually at the top)
+            contact_info = self._extract_contact_info(cleaned_text)
+            result = {
+                'sections': parsed_sections,
+                'contact_info': contact_info,
+                'total_sections': len(parsed_sections),
+                'text_length': len(cleaned_text),
+                'parsing_status': 'success'
+            }
+            logger.info(f"Successfully parsed {len(parsed_sections)} sections")
+            return result
+            
+        except Exception as e: 
+            return Dict[Any, Any] #temp 

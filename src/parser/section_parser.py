@@ -153,9 +153,14 @@ class SectionParser:
                     #^.search() only the first occurrence of pattern, and stores it in match
                     #^returns a Match object (re module has built in re.Match) or None.
                     if match: 
-                        char_position = sum(len(lines[i]) + 1 for i in range(line_idx))
+                        char_position = 0 
+                        for i in range(len(line_idx)): 
+                            char_position += len(lines[i]) + 1 #+1 for the newline 
                         header_pattern_matches.append({
                             'section': section_name,
                             'line_number': line_idx,
+                            'char_position': char_position
+                            #come back later tosee what is going on with the newline bruh
+                            #like visually what is going on i forgot why i did that 
                         })
         return List[Dict[Any, Any]] #temp

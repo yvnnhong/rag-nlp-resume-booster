@@ -78,6 +78,12 @@ class SectionParser:
         }
 
         #Compile regex patterns for improved performance
+        #pipe | means to combine both flags 
         self.compiled_patterns = {}
         for section, patterns in self.section_patterns.items(): 
             self.compiled_patterns[section] = []
+            for pattern in patterns: 
+                compiled_pattern = re.compile(pattern, re.IGNORECASE | re.MULTILINE)
+                self.compiled_patterns[section].append(compiled_pattern)
+
+    def parse_sections #finish thi later 

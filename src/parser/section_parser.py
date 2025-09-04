@@ -164,7 +164,12 @@ class SectionParser:
                             'section': section_name,
                             'line_number': line_idx,
                             'char_position': char_position
-                            #come back later tosee what is going on with the newline bruh
-                            #like visually what is going on i forgot why i did that 
+                            'matched_text': match.group(), 
+                            #^returns the actual text from match = pattern.search(line) 
+                            'confidence': self._calculate_confidence(line, match.group())
                         })
+                        break #stop checking for more patterns for the current section once 
+                        #we've found a match (e.x. why keep checking if we already matched one
+                        #variation of 'experience'?)
+
         return List[Dict[Any, Any]] #temp

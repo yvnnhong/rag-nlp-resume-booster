@@ -154,7 +154,7 @@ class SectionParser:
                     #^returns a Match object (re module has built in re.Match) or None.
                     if match: 
                         char_position = 0 
-                        for i in range(len(line_idx)): 
+                        for i in range(line_idx): 
                             char_position += len(lines[i]) + 1 #+1 for the newline 
                         header_pattern_matches.append({
                             'section': section_name,

@@ -156,6 +156,10 @@ class SectionParser:
                         char_position = 0 
                         for i in range(line_idx): 
                             char_position += len(lines[i]) + 1 #+1 for the newline 
+                            #we're moving left to right starting from the beginning of the 
+                            #text, to see which char position the header starts at relative
+                            #from the very beginning. aka, 
+                            #summing the lengths of all previous lines (including newlines)
                         header_pattern_matches.append({
                             'section': section_name,
                             'line_number': line_idx,

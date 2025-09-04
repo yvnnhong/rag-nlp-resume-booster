@@ -163,13 +163,18 @@ class SectionParser:
                         header_pattern_matches.append({
                             'section': section_name,
                             'line_number': line_idx,
-                            'char_position': char_position
-                            'matched_text': match.group(), 
-                            #^returns the actual text from match = pattern.search(line) 
+                            'char_position': char_position,
+                            'matched_text': match.group(),
+                            #^returns the actual text from match = pattern.search(line)
                             'confidence': self._calculate_confidence(line, match.group())
                         })
                         break #stop checking for more patterns for the current section once 
                         #we've found a match (e.x. why keep checking if we already matched one
                         #variation of 'experience'?)
-
-        return List[Dict[Any, Any]] #temp
+                    #helper method 
+                    def get_char_position(match_dict):
+                        return match_dict['char_position']
+                    #call helper 
+                    matches = sorted(matches, key=get_char_position)
+                    matches = self._remove_duplicate_matches(matches)
+                    return matches

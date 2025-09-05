@@ -186,7 +186,14 @@ class SectionParser:
         for i, match in enumerate(section_matches): 
             section_name = match['section']
             start_pos = match['char_position']
-            #next: determine end position (start of nextsection OR end of text)
+            #Determine end position (start of nextsection OR end of text)
+            if i + 1 < len(section_matches): 
+                end_pos = section_matches[i + 1]['char_position']
+            else: 
+                end_pos = len(text)
+            #extract content 
+            content = text[start_pos:end_pos].strip() #slicing is end-index exclusive
+            #clean up the content (remove the header line)
         pass #temp
         
                     

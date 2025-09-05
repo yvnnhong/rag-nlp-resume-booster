@@ -155,8 +155,11 @@ class SectionParser:
                     if match: 
                         char_position = 0 
                         for i in range(line_idx): 
-                            char_position += len(lines[i]) + 1
-                            #we're moving left to right starting from the beginning of the 
+                            char_position += len(lines[i]) + 1 #+1 since we need to 
+                            #re-insert the newline that was removed from 
+                            #lines = text.split('\n'). We're summing the lengths of all 
+                            #prev lines, plus 1 for each newline. 
+                            #and we're moving left to right starting from the beginning of the 
                             #text, to see which char position the header starts at relative
                             #from the very beginning. aka, 
                             #summing the lengths of all previous lines (including newlines)

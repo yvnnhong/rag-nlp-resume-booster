@@ -17,7 +17,7 @@ class ResumeSection:
 
 class SectionParser:
     """Parse resume text into distinct sections."""
-    def __init__self(self): #Define common section headers and their variations.
+    def __init__(self): #Define common section headers and their variations.
         self.section_patterns: Dict[str, List[str]] = {
             'contact': [
                 r'contact\s+information',
@@ -120,7 +120,7 @@ class SectionParser:
             return {
                 'sections': {},
                 'contact_info': {},
-                'total_sections': {},
+                'total_sections': 0,
                 'text_length': text_length,
                 'parsing_status': 'failed',
                 'error': str(e)
@@ -171,10 +171,15 @@ class SectionParser:
                         break #stop checking for more patterns for the current section once 
                         #we've found a match (e.x. why keep checking if we already matched one
                         #variation of 'experience'?)
-                    #helper method 
-                    def get_char_position(match_dict):
-                        return match_dict['char_position']
-                    #call helper 
-                    matches = sorted(matches, key=get_char_position)
-                    matches = self._remove_duplicate_matches(matches)
-                    return matches
+        #sort the matches from smallest char pos to largest char pos 
+        header_pattern_matches = sorted(header_pattern_matches, key=lambda x: x['char_position'])
+        header_pattern_matches = self._remove_duplicate_matches(header_pattern_matches)
+        return header_pattern_matches
+    
+    def _extract_section_content(self, text: str, section_matches: List[Dict[str, Any]]
+                                 ) -> Dict[str, ResumeSection]: 
+        """Extract content for each identified section."""
+        pass #temp
+        
+                    
+                    

@@ -179,6 +179,11 @@ class SectionParser:
     def _extract_section_content(self, text: str, section_matches: List[Dict[str, Any]]
                                  ) -> Dict[str, ResumeSection]: 
         """Extract content for each identified section."""
+        sections = {}
+        for i, match in enumerate(section_matches): 
+            section_name = match['section']
+            start_pos = match['char_position']
+            #next: determine end position (start of nextsection OR end of text)
         pass #temp
         
                     

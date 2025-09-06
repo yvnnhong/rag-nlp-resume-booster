@@ -270,6 +270,7 @@ class SectionParser:
 
         return contact_info
     
+    #note: refactor _calculate_confidence later to be more specific??
     def _calculate_confidence(self, line: str, matched_text: str) -> float: 
         """Calculate confidence score for section header match.
         This function checks how likely it is that a given line is a true 
@@ -284,7 +285,10 @@ class SectionParser:
         if line.strip().lower().startswith(matched_text.lower()): 
             confidence += 0.2 
         #lower confidence if there is a lot of other text on the same line 
-        pass
+        if len(line.strip()) > len(matched_text) * 3: 
+            confidence -= 0.2
+        return min(1.0, max(0.1, confidence)) #confidence ranges from 0.1 to 1
+        
         
                     
                     

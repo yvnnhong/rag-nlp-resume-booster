@@ -288,6 +288,16 @@ class SectionParser:
         if len(line.strip()) > len(matched_text) * 3: 
             confidence -= 0.2
         return min(1.0, max(0.1, confidence)) #confidence ranges from 0.1 to 1
+    
+    def _remove_duplicate_matches(self, matches: List[Dict[str, Any]]) -> List[Dict[str, Any]]: 
+        """Remove duplicate section matches, keeping the highest confidence ones."""
+        if not matches: 
+            return matches
+        #group by section name
+        sections_found = {}
+        for match in matches: 
+            section = match['section']
+        return List[Dict[str, Any]] #temp 
         
         
                     

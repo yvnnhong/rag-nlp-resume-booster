@@ -307,8 +307,38 @@ class SectionParser:
         #return sorted by ascending (increasing) char position: 
         return sorted(sections_found.values(), key=lambda x: x['char_position'])
     
+    #call get_section_summary from root/tests/test_parser/test_section_parser.py
     def get_section_summary(self, parsed_result: Dict[str, Any]) -> str: 
+        """Generate a summary of parsed sections for debugging"""
+        if parsed_result['parsing_status'] != 'success': 
+            return f"Parsing failed: {parsed_result.get('error', 'Unknown error')}"
+        sections = parsed_result['sections']
+        contact = parsed_result['contact_info']
+        summary = f"Parsed {len(sections)} sections:\n"
+        for name, section in sections.items(): 
+            pass #temp
         return "" #temp
+    
+
+"""
+    def get_section_summary(self, parsed_result: Dict[str, Any]) -> str:
+        if parsed_result['parsing_status'] != 'success':
+            return f"Parsing failed: {parsed_result.get('error', 'Unknown error')}"
+        
+        sections = parsed_result['sections']
+        contact = parsed_result['contact_info']
+        
+        summary = f"Parsed {len(sections)} sections:\n"
+        for name, section in sections.items():
+            summary += f"- {name.title()}: {len(section.content)} chars (confidence: {section.confidence:.2f})\n"
+        
+        summary += f"\nContact info found: "
+        found_contact = [k for k, v in contact.items() if v]
+        summary += ", ".join(found_contact) if found_contact else "None"
+        
+        return summary
+
+"""
 
         
         

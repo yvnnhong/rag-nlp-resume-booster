@@ -199,6 +199,19 @@ class SectionParser:
                 current_section_content_lines = current_section_content_lines[1:] 
                 #^remove header line 
             current_section_content = '\n'.join(current_section_content_lines).strip()
+            """
+            Note: 
+            - current_section_content starts as a string 
+            - .split('\n') makes it a list of strings
+            - .join() turns the list back into one string, inserting \n between each item
+            Example: 
+            ```
+            lines = ["Line 1", "Line 2", "Line 3"] 
+            '\n'.join(lines) 
+            Becomes: 
+            "Line 1\nLine 2\nLine 3"
+            ```
+            """
             #next: only add if we have substantial content 
         pass #temp
         

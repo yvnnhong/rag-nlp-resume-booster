@@ -316,29 +316,20 @@ class SectionParser:
         contact = parsed_result['contact_info']
         summary = f"Parsed {len(sections)} sections:\n"
         for name, section in sections.items(): 
-            pass #temp
-        return "" #temp
-    
-
-"""
-    def get_section_summary(self, parsed_result: Dict[str, Any]) -> str:
-        if parsed_result['parsing_status'] != 'success':
-            return f"Parsing failed: {parsed_result.get('error', 'Unknown error')}"
-        
-        sections = parsed_result['sections']
-        contact = parsed_result['contact_info']
-        
-        summary = f"Parsed {len(sections)} sections:\n"
-        for name, section in sections.items():
+            #name.title() capitalizes each word in the section name (built-in python) 
             summary += f"- {name.title()}: {len(section.content)} chars (confidence: {section.confidence:.2f})\n"
-        
-        summary += f"\nContact info found: "
-        found_contact = [k for k, v in contact.items() if v]
-        summary += ", ".join(found_contact) if found_contact else "None"
-        
+        summary += "\nContact info found: "
+        found_contact: List[str] = []
+        for key in contact: 
+            if contact[key]: 
+                found_contact.append(key)
+        #summary += ", ".join(found_contact) if found_contact else "None"
+        if found_contact: 
+            summary += ", ".join(found_contact)
+        else: 
+            summary += "None"
         return summary
 
-"""
 
         
         

@@ -294,10 +294,22 @@ class SectionParser:
         if not matches: 
             return matches
         #group by section name
-        sections_found = {}
+        sections_found: Dict[str, Dict[str, Any]] = {}
+        """
+        sections_found is a dictionary mapping section names (str) to match dictionaries 
+        (Dict[str, Any]).
+        """
         for match in matches: 
-            section = match['section']
-        return List[Dict[str, Any]] #temp 
+            section_name = match['section']
+            if section_name not in sections_found or match['confidence'] > sections_found[section_name]['confidence']:
+                sections_found['section_name'] = match
+                #we're only keeping the match with the highest confidence (if dupes exist)
+        #return sorted by ascending (increasing) char position: 
+        return sorted(sections_found.values(), key=lambda x: x['char_position'])
+    
+    def get_section_summary(self, parsed_result: Dict[str, Any]) -> str: 
+        return "" #temp
+
         
         
                     

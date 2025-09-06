@@ -229,7 +229,22 @@ class SectionParser:
     
     def _extract_contact_info(self, text: str) -> Dict[str, Optional[str]]: 
         """Extract contact info from resume text."""
-        pass
+        #note: Dict[str, Optional[str]] means that the values are allowed to be None
+        contact_info = {
+            'email': None, 
+            'phone': None, 
+            'linkedin': None, 
+            'github': None, 
+            'website': None
+        }
+        #Email pattern
+        email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        email_match = re.search(email_pattern, text) #find the first occurrence of the pattern
+        if email_match: 
+            contact_info['email'] = email_match.group() #store the match we found in LHS
+        #Phone pattern (various formats)
+
+        pass #temp
         
                     
                     

@@ -185,15 +185,16 @@ class SectionParser:
         sections = {}
         for i, match in enumerate(section_matches): 
             section_name = match['section']
-            start_pos = match['section_starting_char_position']
+            current_section_start_pos = match['section_starting_char_position']
             #Determine end position (start of nextsection OR end of text)
             if i + 1 < len(section_matches): 
-                end_pos = section_matches[i + 1]['section_starting_char_position']
+                current_section_end_pos = section_matches[i + 1]['section_starting_char_position']
             else: 
-                end_pos = len(text)
+                current_section_end_pos = len(text)
             #extract content 
-            current_section_content = text[start_pos:end_pos].strip() #slicing is end-index exclusive
-            #clean up the content (remove the header line)
+            current_section_content = text[current_section_start_pos:current_section_end_pos].strip() 
+            #^reminder: slicing is end-index exclusive
+            #next, clean up the content (remove the header line)
             current_section_content_lines = current_section_content.split('\n')
             if current_section_content_lines: 
                 current_section_content_lines = current_section_content_lines[1:] 
@@ -208,12 +209,27 @@ class SectionParser:
             ```
             lines = ["Line 1", "Line 2", "Line 3"] 
             '\n'.join(lines) 
+            ```
             Becomes: 
+            ```
             "Line 1\nLine 2\nLine 3"
             ```
+            Analogy: .join('\n') uses '\n' like "glue"
             """
             #next: only add if we have substantial content 
-        pass #temp
+            if len(current_section_content) > 10: #greater than 10 chars 
+                sections[section_name] = ResumeSection(
+                    name = section_name,
+                    content = current_section_content,
+                    start_index = current_section_start_pos,
+                    end_index = current_section_end_pos,
+                    confidence = match['confidence']
+                )
+        return sections
+    
+    def _extract_contact_info(self, text: str) -> Dict[str, Optional[str]]: 
+        """Extract contact info from resume text."""
+        pass
         
                     
                     

@@ -243,11 +243,13 @@ class SectionParser:
         email_match = re.search(email_pattern, text) #find the first occurrence of the pattern
         if email_match: 
             contact_info['email'] = email_match.group() #store the match we found in LHS
+
         #Phone pattern (various formats)
         phone_pattern = r'(\+?1[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}'
         phone_match = re.search(phone_pattern, text)
         if phone_match: 
             contact_info['phone'] = phone_match.group()
+
         #Linkedin pattern
         linkedin_pattern = r'linkedin\.com/in/[\w-]+'
         linkedin_match = re.search(linkedin_pattern, text, re.IGNORECASE)
@@ -256,8 +258,19 @@ class SectionParser:
 
         #Github pattern
         github_pattern = r'github\.com/[\w-]+'
+        github_match = re.search(github_pattern, text, re.IGNORECASE)
+        if github_match: 
+            contact_info['github'] = github_match.group()
 
-        pass #temp
+        #Wesite pattern (basic)
+        website_pattern = r'https?://[\w.-]+\.[a-z]{2,}(?:/[\w.-]*)*'
+        website_match = re.search(website_pattern, text, re.IGNORECASE)
+        if website_match: 
+            contact_info['website'] = website_match.group()
+
+        return contact_info
+    
+    #next func
         
                     
                     

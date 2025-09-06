@@ -270,7 +270,10 @@ class SectionParser:
 
         return contact_info
     
-    #next func
+    def _calculate_confidence(self, line: str, matched_text: str) -> float: 
+        """Calculate confidence score for section match"""
+        confidence = 0.5 #base confidence
+        pass
         
                     
                     

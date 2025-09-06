@@ -166,7 +166,7 @@ class SectionParser:
                         header_pattern_matches.append({
                             'section': section_name,
                             'line_number': line_idx,
-                            'char_position': char_position,
+                            'section_starting_char_position': char_position,
                             'matched_text': match.group(),
                             #^returns the actual text from match = pattern.search(line)
                             'confidence': self._calculate_confidence(line, match.group())
@@ -185,15 +185,21 @@ class SectionParser:
         sections = {}
         for i, match in enumerate(section_matches): 
             section_name = match['section']
-            start_pos = match['char_position']
+            start_pos = match['section_starting_char_position']
             #Determine end position (start of nextsection OR end of text)
             if i + 1 < len(section_matches): 
-                end_pos = section_matches[i + 1]['char_position']
+                end_pos = section_matches[i + 1]['section_starting_char_position']
             else: 
                 end_pos = len(text)
             #extract content 
-            content = text[start_pos:end_pos].strip() #slicing is end-index exclusive
+            current_section_content = text[start_pos:end_pos].strip() #slicing is end-index exclusive
             #clean up the content (remove the header line)
+            current_section_content_lines = current_section_content.split('\n')
+            if current_section_content_lines: 
+                current_section_content_lines = current_section_content_lines[1:] 
+                #^remove header line 
+            current_section_content = '\n'.join(current_section_content_lines).strip()
+            #next: only add if we have substantial content 
         pass #temp
         
                     

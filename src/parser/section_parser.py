@@ -230,6 +230,7 @@ class SectionParser:
     def _extract_contact_info(self, text: str) -> Dict[str, Optional[str]]: 
         """Extract contact info from resume text."""
         #note: Dict[str, Optional[str]] means that the values are allowed to be None
+        #note: escape character \ allows us to treat the next char literally
         contact_info = {
             'email': None, 
             'phone': None, 
@@ -243,6 +244,11 @@ class SectionParser:
         if email_match: 
             contact_info['email'] = email_match.group() #store the match we found in LHS
         #Phone pattern (various formats)
+        phone_pattern = r'(\+?1[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}'
+        phone_match = re.search(phone_pattern, text)
+        if phone_match: 
+            contact_info['phone'] = phone_match.group()
+        #Linkedin pattern
 
         pass #temp
         

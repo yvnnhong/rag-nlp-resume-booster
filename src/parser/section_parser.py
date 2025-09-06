@@ -249,6 +249,13 @@ class SectionParser:
         if phone_match: 
             contact_info['phone'] = phone_match.group()
         #Linkedin pattern
+        linkedin_pattern = r'linkedin\.com/in/[\w-]+'
+        linkedin_match = re.search(linkedin_pattern, text, re.IGNORECASE)
+        if linkedin_match: 
+            contact_info['linkedin'] = linkedin_match.group()
+
+        #Github pattern
+        github_pattern = r'github\.com/[\w-]+'
 
         pass #temp
         

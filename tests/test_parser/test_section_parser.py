@@ -38,7 +38,16 @@ def test_section_parsing_full_pipeline():
                 continue
             #Step 3: parse sections from processed text 
             section_result: Dict[str, Any] = section_parser.parse_sections(processing_result['cleaned_text'])
-            #keep writingfrom here 
+            if section_result['parsing_status'] == 'success': 
+                print(f"Section parsing successful.")
+                print(f"Sections found: {section_result['total_sections']}")
+                #show corresponding confidence scores.
+                for section_name, section_obj in section_result['sections'].items():
+                    print(f"{section_name.title()}: {len(section_obj.content)} "
+                          f"total chars (confidence: {section_obj.confidence:.2f})")
+                #Show contact info
+
+                
             pass #temp
         except Exception as e: 
             print(f"")

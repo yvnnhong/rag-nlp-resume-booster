@@ -1,4 +1,5 @@
 import logging
+from typing import Dict, Any
 import sys
 sys.path.append('.')
 from src.parser.pdf_extractor import PDFExtractor
@@ -36,7 +37,7 @@ def test_section_parsing_full_pipeline():
                 print(f"Failed to process text: {processing_result.get('error', 'Unknown error')}")
                 continue
             #Step 3: parse sections from processed text 
-            section_result = section_parser.parse_sections(processing_result['cleaned_text'])
+            section_result: Dict[str, Any] = section_parser.parse_sections(processing_result['cleaned_text'])
             #keep writingfrom here 
             pass #temp
         except Exception as e: 

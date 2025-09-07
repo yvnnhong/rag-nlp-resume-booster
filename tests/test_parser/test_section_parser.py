@@ -27,11 +27,17 @@ def test_section_parsing_full_pipeline():
         try: 
             #Step 1: extract text from pdf 
             pdf_result = pdf_extractor.extract_text_disk(file_path)
-            if not pdf_result or pdf_result['extrator_status'] != 'success':
+            if not pdf_result or pdf_result['extractor_status'] != 'success':
                 print(f"Failed to extract text from {file_path}")
                 continue 
             #Step 2: Process the extracted text
-            processing_result = text_processor.process_text()
+            processing_result = text_processor.process_text(pdf_result['full_text'])
+            if processing_result['processing_status'] != 'success': 
+                print(f"Failed to process text: {processing_result.get('error', 'Unknown error')}")
+                continue
+            #Step 3: parse sections from processed text 
+            section_result = section_parser.parse_sections(processing_result['cleaned_text'])
+            #keep writingfrom here 
             pass #temp
         except Exception as e: 
             print(f"")

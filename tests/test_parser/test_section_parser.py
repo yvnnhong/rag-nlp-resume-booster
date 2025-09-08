@@ -166,18 +166,41 @@ def test_edge_cases():
     print(f"No sections result: {result['parsing_status']}, " 
           f"number of sections found: {result['total_sections']}")
     #Test None input 
-    print("\n 1) Testing None input: ")
+    print("\n 3) Testing None input: ")
     result = parser.parse_sections(None)
     print(f"None input result: {result['parsing_status']}")
     #Testing text with only contact info 
-    print("\n 1) Testing text with only contact info: ")
+    print("\n 4) Testing text with only contact info: ")
     contact_only_text = "John Doe\njohn.doe@email.com\n(555)" 
     + "123-4567\nlinkedin.com/in/johndoe"
     result = parser.parse_sections(contact_only_text)
     if result['parsing_status'] == 'success': 
-        
+        contact_fields_found = []
+        for k, v in result['contact_info'].items(): 
+            if v: 
+                contact_fields_found.append(k)
+        print(f"Contact-only text: {len(contact_fields_found)} contact fields found, "
+              f"{result['total_sections']} total sections found")
+    #Test text with duplicate section headers
+    print("\n 5) Testing text with duplicate section headers " )
+    duplicate_text = """
+    EXPERIENCE
+    First experience section
     
+    Some other content here
+    
+    EXPERIENCE
+    Second experience section (duplicate)
+    
+    SKILLS
+    My skills here
+    """
+    result = parser.parse_sections(duplicate_text)
+    if result['parsing_status'] == 'success': 
+        print(f"Duplicate headers: {result['total_sections']} unique sections found")
+        if 'experience' in result['sections']: 
+            exp_section = result['sections']['experience']
+            print(f"Experience section confidence: {exp_section.confidence:.2f}")
 
-    
-    pass #temp 
-            
+def test_specific_patterns(): 
+    pass #temp

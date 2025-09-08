@@ -203,4 +203,98 @@ def test_edge_cases():
             print(f"Experience section confidence: {exp_section.confidence:.2f}")
 
 def test_specific_patterns(): 
-    pass #temp
+    """Test specific header pattern matching"""
+    print("\n" + "=" * 70)
+    print("6) Testing specific section header patterns")
+    print("=" * 70)
+    parser = SectionParser()
+    # Test various header formats
+    test_cases = [
+        ("EXPERIENCE", "Standard uppercase"),
+        ("Experience", "Title case"),
+        ("experience", "Lowercase"),
+        ("Work Experience", "Multi-word"),
+        ("Professional Experience", "Extended form"),
+        ("TECHNICAL SKILLS", "Technical skills variant"),
+        ("Skills and Abilities", "Skills variant"),
+        ("Education", "Simple education"),
+        ("Educational Background", "Extended education"),
+        ("Projects", "Simple projects"),
+        ("Key Projects", "Extended projects"),
+        ("Certifications", "Simple certifications"),
+        ("Professional Certifications", "Extended certifications")
+    ]
+    for header, header_description in test_cases: 
+        test_text = f"""
+        Some intro text here
+        
+        {header}
+        Content under this header goes here
+        More content on next line
+        
+        SKILLS
+        Some skills listed here
+        """
+        result = parser.parse_sections(test_text)
+        if result['parsing_status'] == 'success' and result['total_sections'] >= 1: 
+            #Check if the expected section was found.
+            found_sections = list(result['sections'].keys())
+            print(f"'{header}' ({header_description}): Found sections: {found_sections}")
+        else: 
+            print(f"'{header}' ({header_description}): No sections found")
+
+def test_contact_extraction_patterns(): 
+    """7) Test contact information extraction patterns"""
+    print("\n" + "=" * 70)
+    print("7) Testing contact information extraction patterns.")
+    print("=" * 70)
+    parser = SectionParser()
+    # Test various contact formats
+    contact_test_cases = [
+        ("john.doe@email.com", "Standard email"),
+        ("(555) 123-4567", "Phone with parentheses"),
+        ("555-123-4567", "Phone with dashes"),
+        ("555.123.4567", "Phone with dots"),
+        ("+1 555 123 4567", "International phone"),
+        ("linkedin.com/in/johndoe", "LinkedIn profile"),
+        ("github.com/johndoe", "GitHub profile"),
+        ("https://johndoe.com", "Personal website"),
+        ("www.johndoe.com", "Website with www")
+    ]
+
+    for contact_text, contact_text_description in contact_test_cases: 
+        test_text = f"""
+        John Doe
+        Software Engineer
+        {contact_text}
+        
+        EXPERIENCE
+        Some work experience here
+        """
+        result = parser.parse_sections(test_text)
+        if result['parsing_status'] == 'success':
+            found_contact = []
+            for k, v in result['contact_info'].items(): 
+                if v: 
+                    found_contact.append(k)
+            contact_vals = []
+            for v in result['contact_value'].values(): 
+                if v: 
+                    contact_vals.append(v)
+            print(f"{contact_text_description}: Found {len(found_contact)} fields: {contact_vals}")
+        else: 
+            print(f"{contact_text_description}: Parsing failed.")
+
+if __name__ == "__main__": 
+    #Configure logging 
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+    # Run all tests
+    test_section_parsing_full_pipeline()
+    test_section_parsing_with_sample_text()
+    test_edge_cases()
+    test_specific_patterns()
+    test_contact_extraction_patterns()
+

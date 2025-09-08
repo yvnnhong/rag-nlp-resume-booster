@@ -70,5 +70,84 @@ def test_section_parsing_full_pipeline():
             print(f"Pipeline test failed with error: {str(e)}")
 
 def test_section_parsing_with_sample_text(): 
-    pass
+    """Test section parsing with known sample resume text."""
+    print("\n" + "=" * 70)
+    print("Testing section parsing with sample text: ")
+    print("=" * 70)
+    sample_resume_text = """
+    Marcus Rodriguez
+    Software Engineer
+    marcus.rodriguez@email.com | (555) 123-4567 | linkedin.com/in/marcus-rodriguez | github.com/marcus-dev
+    
+    PROFESSIONAL SUMMARY
+    Experienced software engineer with 5+ years developing scalable web applications and machine learning systems.
+    Passionate about clean code and innovative solutions.
+    
+    EXPERIENCE
+    Senior Software Engineer - TechCorp Inc (2020-Present)
+    - Built scalable web applications using Python, React, and AWS
+    - Led team of 4 engineers on major product features
+    - Improved system performance by 40% through optimization
+    
+    Software Engineer - StartupXYZ (2018-2020)
+    - Developed REST APIs and microservices architecture
+    - Implemented CI/CD pipelines reducing deployment time by 60%
+    - Collaborated with cross-functional teams on product development
+    
+    EDUCATION
+    Bachelor of Science in Computer Science
+    Massachusetts Institute of Technology (2014-2018)
+    GPA: 3.8/4.0
+    Relevant Coursework: Data Structures, Algorithms, Machine Learning, Databases
+    
+    SKILLS
+    Programming Languages: Python, JavaScript, Java, C++, SQL
+    Frameworks & Tools: React, Django, Flask, Node.js, Docker, Kubernetes
+    Databases: PostgreSQL, MongoDB, Redis
+    Cloud Platforms: AWS, Google Cloud Platform, Azure
+    
+    PROJECTS
+    Resume Analyzer Tool (2024)
+    - Built ML-powered resume analysis system using NLP and RAG architecture
+    - Deployed on AWS with Docker containerization and CI/CD pipeline
+    - Technologies: Python, PyTorch, FastAPI, ChromaDB
+    
+    E-commerce Platform (2023)
+    - Developed full-stack e-commerce application with payment integration
+    - Implemented real-time inventory management and analytics dashboard
+    - Technologies: React, Node.js, PostgreSQL, Stripe API
+    
+    CERTIFICATIONS
+    AWS Certified Solutions Architect - Associate (2023)
+    Google Cloud Professional Developer (2022)
+    Certified Kubernetes Administrator (2021)
+    """
+    parser = SectionParser()
+    result = parser.parse_sections(sample_resume_text)
+    if result['parsing_status'] == 'success': 
+        print(f"Sample text parsing successful.")
+        print(f"Total number of sections found: {result['total_sections']}")
+        #Show detailed section analysis
+        print(f"\nDetailed section analysis: ")
+        #note: section_metadata is a ResumeSection object. 
+        for section_name, section_metadata in result['sections'].items(): 
+            print(f"\n{section_name.upper()}:")
+            print(f"Confidence: {section_metadata.confidence:.2f}")
+            print(f"Length: {len(section_metadata.content)} characters long")
+            print(f"Start index: {section_metadata.start_index}-{section_metadata.end_index}")
+            #Show first few lines of content: 
+            lines = section_metadata.content.split('\n')[:3]
+            for line in lines: 
+                if line.strip():
+                    print(f"{line.strip()}")
+        #show contact info extraction: 
+        print(f"\nContact info extracted: ")
+        for k, v in result['contact_info'].items(): 
+            if v: 
+                print(f"{k.title()}: {v}")
+    else: 
+        print(f"Sample text parsing failed: {result.get('error', 'Unknown error')}")
+
+def test_edge_cases(): 
+    pass #temp 
             

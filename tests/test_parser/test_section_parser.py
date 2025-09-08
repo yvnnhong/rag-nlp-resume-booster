@@ -42,9 +42,9 @@ def test_section_parsing_full_pipeline():
                 print(f"Section parsing successful.")
                 print(f"Sections found: {section_result['total_sections']}")
                 #show corresponding confidence scores.
-                for section_name, section_obj in section_result['sections'].items():
-                    print(f"{section_name.title()}: {len(section_obj.content)} "
-                          f"total chars (confidence: {section_obj.confidence:.2f})")
+                for section_name, section_metadata in section_result['sections'].items():
+                    print(f"{section_name.title()}: {len(section_metadata.content)} "
+                          f"total chars (confidence: {section_metadata.confidence:.2f})")
                 #Show contact info
                 contact = section_result['contact_info']
                 found_contact = []

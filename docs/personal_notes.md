@@ -22,7 +22,7 @@ Example:
 ```
 
 ## Unresolved problems 
-# Problem 2: 
+### Problem 1: 
 This line in text_processor.py: 
 ```
 if clean_word in self.resume_stopwords and not self._is_technical_term(clean_word): 
@@ -32,3 +32,6 @@ it's currently too restrictive and will skip over many many important keywords.
 Keep it now but we have to change it later -- perhaps integrate with the feature of 
 pasting in the job description and then we can see how well the user's resume matches 
 the job description. 
+
+### Problem 2: test_section_parser.py is returning 0 sections found for all tests
+Fix this after the core RAG logic is implemented. Prioritize getting a working prototype first  

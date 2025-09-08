@@ -46,6 +46,15 @@ def test_section_parsing_full_pipeline():
                     print(f"{section_name.title()}: {len(section_obj.content)} "
                           f"total chars (confidence: {section_obj.confidence:.2f})")
                 #Show contact info
+                contact = section_result['contact_info']
+                found_contact = []
+                for k, v in contact.items(): 
+                    if v: 
+                        found_contact.append(f"{k}: {v}")
+                if found_contact: 
+                    print(f"Contact info: {', '.join(found_contact)}")
+                else:
+                    print("No contact info found.")
 
                 
             pass #temp

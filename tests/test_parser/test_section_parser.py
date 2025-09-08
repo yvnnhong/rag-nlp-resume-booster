@@ -149,5 +149,25 @@ def test_section_parsing_with_sample_text():
         print(f"Sample text parsing failed: {result.get('error', 'Unknown error')}")
 
 def test_edge_cases(): 
+    """Test edge cases and error handling for section parsing."""
+    print("\n" + "=" * 70)
+    print("Testing edge cases and error handling for section parsing.")
+    print("=" * 70)
+    parser = SectionParser()
+    #1) Test empty text 
+    print("\n 1) Testing empty text ")
+    result = parser.parse_sections("")
+    print(f"Empty text result: {result['parsing_status']}")
+    #2) Test text with no sections 
+    print("\n 2) Testing text with no recognizable sections ")
+    no_sections_text = "This is just some random text with no resume" 
+    + "sections at all. Just words and sentences."
+    result = parser.parse_sections(no_sections_text)
+    print(f"No sections result: {result['parsing_status']}, " 
+          f"number of sections found: {result['total_sections']}")
+    #Test None input 
+    
+
+    
     pass #temp 
             

@@ -28,7 +28,7 @@ def test_section_parsing_full_pipeline():
         try: 
             #Step 1: extract text from pdf 
             pdf_result = pdf_extractor.extract_text_disk(file_path)
-            if not pdf_result or pdf_result['extractor_status'] != 'success':
+            if not pdf_result or pdf_result['extraction_status'] != 'success':
                 print(f"Failed to extract text from {file_path}")
                 continue 
             #Step 2: Process the extracted text
@@ -160,8 +160,8 @@ def test_edge_cases():
     print(f"Empty text result: {result['parsing_status']}")
     #2) Test text with no sections 
     print("\n 2) Testing text with no recognizable sections ")
-    no_sections_text = "This is just some random text with no resume" 
-    + "sections at all. Just words and sentences."
+    no_sections_text = ("This is just some random text with no resume" 
+    "sections at all. Just words and sentences.")
     result = parser.parse_sections(no_sections_text)
     print(f"No sections result: {result['parsing_status']}, " 
           f"number of sections found: {result['total_sections']}")
@@ -171,8 +171,8 @@ def test_edge_cases():
     print(f"None input result: {result['parsing_status']}")
     #Testing text with only contact info 
     print("\n 4) Testing text with only contact info: ")
-    contact_only_text = "John Doe\njohn.doe@email.com\n(555)" 
-    + "123-4567\nlinkedin.com/in/johndoe"
+    contact_only_text = ("John Doe\njohn.doe@email.com\n(555)" 
+    "123-4567\nlinkedin.com/in/johndoe")
     result = parser.parse_sections(contact_only_text)
     if result['parsing_status'] == 'success': 
         contact_fields_found = []
@@ -278,7 +278,7 @@ def test_contact_extraction_patterns():
                 if v: 
                     found_contact.append(k)
             contact_vals = []
-            for v in result['contact_value'].values(): 
+            for v in result['contact_info'].values(): 
                 if v: 
                     contact_vals.append(v)
             print(f"{contact_text_description}: Found {len(found_contact)} fields: {contact_vals}")

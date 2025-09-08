@@ -175,7 +175,7 @@ class SectionParser:
                         #we've found a match (e.x. why keep checking if we already matched one
                         #variation of 'experience'?)
         #sort the matches from smallest char pos to largest char pos 
-        header_pattern_matches = sorted(header_pattern_matches, key=lambda x: x['char_position'])
+        header_pattern_matches = sorted(header_pattern_matches, key=lambda x: x['section_starting_char_position'])
         header_pattern_matches = self._remove_duplicate_matches(header_pattern_matches)
         return header_pattern_matches
     
@@ -279,7 +279,7 @@ class SectionParser:
         self.section_patterns). """
         confidence = 0.5 #base confidence
         #higher confidence if it's on its own line 
-        if line.strip().lower == matched_text.lower():
+        if line.strip().lower() == matched_text.lower():
             confidence += 0.3
         #higher confidence if it's at the beginning of the line 
         if line.strip().lower().startswith(matched_text.lower()): 
@@ -302,10 +302,10 @@ class SectionParser:
         for match in matches: 
             section_name = match['section']
             if section_name not in sections_found or match['confidence'] > sections_found[section_name]['confidence']:
-                sections_found['section_name'] = match
+                sections_found[section_name] = match
                 #we're only keeping the match with the highest confidence (if dupes exist)
         #return sorted by ascending (increasing) char position: 
-        return sorted(sections_found.values(), key=lambda x: x['char_position'])
+        return sorted(sections_found.values(), key=lambda x: x['section_starting_char_position'])
     
     #call get_section_summary from root/tests/test_parser/test_section_parser.py
     def get_section_summary(self, parsed_result: Dict[str, Any]) -> str: 

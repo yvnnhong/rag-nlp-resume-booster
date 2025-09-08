@@ -42,6 +42,7 @@ def test_section_parsing_full_pipeline():
                 print(f"Section parsing successful.")
                 print(f"Sections found: {section_result['total_sections']}")
                 #show corresponding confidence scores.
+                #note: section_metadata is a ResumeSection object 
                 for section_name, section_metadata in section_result['sections'].items():
                     print(f"{section_name.title()}: {len(section_metadata.content)} "
                           f"total chars (confidence: {section_metadata.confidence:.2f})")

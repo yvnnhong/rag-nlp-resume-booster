@@ -166,6 +166,16 @@ def test_edge_cases():
     print(f"No sections result: {result['parsing_status']}, " 
           f"number of sections found: {result['total_sections']}")
     #Test None input 
+    print("\n 1) Testing None input: ")
+    result = parser.parse_sections(None)
+    print(f"None input result: {result['parsing_status']}")
+    #Testing text with only contact info 
+    print("\n 1) Testing text with only contact info: ")
+    contact_only_text = "John Doe\njohn.doe@email.com\n(555)" 
+    + "123-4567\nlinkedin.com/in/johndoe"
+    result = parser.parse_sections(contact_only_text)
+    if result['parsing_status'] == 'success': 
+        
     
 
     

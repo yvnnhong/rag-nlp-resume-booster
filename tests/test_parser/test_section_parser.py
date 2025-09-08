@@ -55,9 +55,19 @@ def test_section_parsing_full_pipeline():
                     print(f"Contact info: {', '.join(found_contact)}")
                 else:
                     print("No contact info found.")
-
-                
-            pass #temp
+                #Show preview of each section: 
+                print(f"\nSection content previews: ")
+                for section_name, section_metadata in section_result['sections'].items(): 
+                    preview = section_metadata.content[:100].replace('\n', ' ').strip()
+                    if preview: 
+                        print(f"{section_name}: {preview}...")
+                    else:
+                        print(f"{section_name}: [No content]")
+            else: 
+                print(f"Section parsing failed: {section_result.get('error', 'Unknown error')}")
         except Exception as e: 
-            print(f"")
-            pass
+            print(f"Pipeline test failed with error: {str(e)}")
+
+def test_section_parsing_with_sample_text(): 
+    pass
+            

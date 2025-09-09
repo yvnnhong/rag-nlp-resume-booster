@@ -251,9 +251,34 @@ class JobAnalyzer:
         return education_reqs
     
     def _extract_certifications(self, text: str) -> List[str]: 
-        """Extract certification requirements"""
+        """Extract certification requirements."""
         certs = []
         for pattern in self.certification_patterns: 
+            matches = re.findall(pattern, text, re.IGNORECASE)
+            for match in matches: 
+                certs.append(match.strip())
+        return certs
+    
+    def _extract_job_responsibilities(self, text: str) -> List[str]:
+        """Extract key responsibilities from job description."""
+        responsibilities: List[str] = []
+        #Look for responsibility sections
+        resp_sections = re.findall(
+            r'(?:responsibilities|duties|you\s+will):\s*([^.]*(?:\.[^.]*){0,5})',
+            text, re.IGNORECASE | re.DOTALL
+        )
+        for section in resp_sections: 
+            #Split by bullet or line breaks
+            resp_items = re.split(r'[•\n-]', section)
+            for item in resp_items: 
+                item = item.strip()
+                if len(item) > 20: #filter out short fragments
+                    responsibilities.append(item)
+        return responsibilities[:10] #only return top 10 
+    
+    def _extract_salary_range(self, text: str) -> Optional[str]: 
+        """Extract salary range if mentioned"""
+
             
 
 

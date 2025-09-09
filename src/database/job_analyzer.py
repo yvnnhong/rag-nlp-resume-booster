@@ -172,5 +172,37 @@ class JobAnalyzer:
         return company_info
     
     def _extract_required_skills(self, text: str) -> List[str]: 
-        return List[str] #temp
+        """Extract required technical skills."""
+        required_skills = set()
+        #look for required skills sections
+        required_sections = re.findall(
+            r'(?:required|requirements|job\s+requirements|must\s+have|essential).*?(?:skills?|technologies?|experience):?\s*([^.]*)',
+            text, re.IGNORECASE | re.DOTALL #DOTALL means 'make the dot match any character'
+        )
+        """
+        re.findall(pattern, string, flags) -> List[str]: searches the entire string for 
+        all non-overlapping matches of the pattern. 
+        """
+        #Extract skills from these sections: 
+        for section in required_sections: 
+            skills = self._extract_skills_from_text(section)
+            required_skills.update(skills) 
+            #.update() is for updating a set after adding new items
+        return list(required_skills)
+    
+    def _extract_preferred_skills(self, text: str) -> List[str]: 
+        """Extract preferred/nice-to-have skills"""
+        preferred_skills = set()
+        #Look for the preferrred skills sections 
+        preferred_sections = re.findall(
+            r'(?:preferred|nice\s+to\s+have|bonus|plus).*?(?:skills?|technologies?|experience):?\s*([^.]*)',
+            text, re.IGNORECASE | re.DOTALL
+        )
+        for section in preferred_sections: 
+            skills = set._extract_skills_from_text(section)
+            preferred_skills.update(skills)
 
+        return list(preferred_skills)
+    
+    def _extract_skills_from_text(self, text: str) -> Set[str]: 
+        pass

@@ -36,7 +36,7 @@ class JobAnalyzer:
     def __init__(self): 
         self.tech_skills_patterns = {
             'programming_languages': [ #pipe '|' means "any one of these can match" (match one at a time)
-                r'\b(?:python|java|javascript|typescript|c\+\+|c#|go|rust|php|ruby|swift|kotlin|scala|r|matlab)\b',
+                r'\b(?:python|java|javascript|typescript|c\+\+|c#|go|rust|php|ruby|swift|kotlin|scala|r|matlab|triton)\b',
                 r'\b(?:html|css|sql|nosql|bash|powershell)\b'
             ],
             'frameworks': [
@@ -205,4 +205,28 @@ class JobAnalyzer:
         return list(preferred_skills)
     
     def _extract_skills_from_text(self, text: str) -> Set[str]: 
-        pass
+        """Extract technical skills from a text section"""
+        skills = set()
+        for category, patterns in self.tech_skills_patterns.items(): 
+            for pattern in patterns: 
+                matches = re.findall(pattern, text, re.IGNORECASE)
+                for match in matches:
+                    skills.add(match.lower())
+        return skills
+    
+    def _extract_experience_requirements(self, text: str) -> Dict[str, Any]: 
+        """Extract experience level and years required"""
+        experience_info = {'years': None, 'level': 'unknown'}
+        #Extract years of experience
+        yoe_patterns = [
+            r'(\d+)\+?\s+years?\s+(?:of\s+)?experience',
+            r'minimum\s+of\s+(\d+)\s+years?',
+            r'at\s+least\s+(\d+)\s+years?'
+        ]
+        for pattern in yoe_patterns: 
+            match = re.search(pattern, text, re.IGNORECASE)
+            if match: 
+                experience_info['years'] = int(match.group(1))
+                break 
+
+        

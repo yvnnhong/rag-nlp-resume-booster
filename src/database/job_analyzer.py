@@ -224,9 +224,28 @@ class JobAnalyzer:
             r'at\s+least\s+(\d+)\s+years?'
         ]
         for pattern in yoe_patterns: 
-            match = re.search(pattern, text, re.IGNORECASE)
+            match = re.search(pattern, text, re.IGNORECASE) #re.search() returns the first match
             if match: 
                 experience_info['years'] = int(match.group(1))
-                break 
+                break #immediately stops the entire loop; no more iterations will runs
+                #note: 
+                #"break" => exit the loop entirely 
+                #"continue" => skip this iteration and keep looping
+        #Determine experience level
+        for level, patterns in self.experience_indicators.items(): 
+            for pattern in patterns: 
+                if re.search(pattern, text, re.IGNORECASE): 
+                    experience_info['level'] = level
+                    break
+            if experience_info['level'] != 'unknown': 
+                break
+        return experience_info
+    
+    def _extract_education_requirements(self, text: str) -> List[str]: 
+        """Extract education requirements"""
+        education_reqs = []
+        for pattern in self.education_patterns.items(): 
+            
+
 
         

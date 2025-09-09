@@ -278,8 +278,63 @@ class JobAnalyzer:
     
     def _extract_salary_range(self, text: str) -> Optional[str]: 
         """Extract salary range if mentioned"""
+        salary_description_patterns = [
+            r'\$(\d{1,3}(?:,\d{3})*(?:k)?)\s*[-–]\s*\$?(\d{1,3}(?:,\d{3})*(?:k)?)',
+            r'salary:?\s*\$?(\d{1,3}(?:,\d{3})*(?:k)?)',
+            r'compensation:?\s*\$?(\d{1,3}(?:,\d{3})*(?:k)?)'
+        ]
+        for pattern in salary_description_patterns:
+            match = re.search(pattern, text, re.IGNORECASE)
+            if match: 
+                return match.group(0)
+            #group(0) returns the full substring that matched the whole pattern
+            #groups 1+ match the capturing groups (the parts inside parentheses)
+        return None #default if no salary listed/found
+    
+    def _extract_industry(self, text: str) -> str: 
+        """Determine industry from job description"""
+        industry_keywords: Dict[str, List[str]] = {
+            'technology': ['software', 'tech', 'saas', 'platform', 'digital'],
+            'finance': ['bank', 'financial', 'fintech', 'investment', 'trading'],
+            'healthcare': ['health', 'medical', 'hospital', 'pharmaceutical'],
+            'education': ['education', 'university', 'school', 'learning'],
+            'retail': ['retail', 'e-commerce', 'shopping', 'consumer'],
+            'consulting': ['consulting', 'advisory', 'strategy']
+        }
+        for industry, keywords in industry_keywords.items(): 
+            for keyword in keywords: 
+                if keyword in text: 
+                    return industry
+        return 'technology' #default fallback if no industry found
+    
+    def get_requirements_summary(self, requirements: JobRequirements) -> str: 
+        """Generate a human-readable summary of job requirements. """
+        summary = f"Job analysis summary for {requirements.job_title}: \n"
+        summary += f"Industry: {requirements.industry.title()}\n"
+        summary += f"Experience Level: {requirements.experience_level.title()}"
+        if requirements.experience_years: 
+            summary += f"({requirements.experience_years}+ years)\n"
+        else: 
+            summary += "\n"
+            
+        if requirements.required_skills:
+            summary += f"Required Skills: {', '.join(requirements.required_skills[:5])}\n"
+
+        if requirements.preferred_skills:
+            summary += f"Preferred Skills: {', '.join(requirements.preferred_skills[:3])}\n"
+
+        if requirements.education_requirements:
+            summary += f"Education: {', '.join(requirements.education_requirements)}\n"
+        
+        if requirements.salary_range:
+            summary += f"Salary: {requirements.salary_range}\n"
+        
+        return summary
+
+
 
             
 
 
         
+ 

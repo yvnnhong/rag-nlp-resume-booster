@@ -34,7 +34,7 @@ class JobRequirements:
 class JobAnalyzer: 
     """Extract and analyze requirements from job descriptions"""
     def __init__(self): 
-        self.tech_skills_patterns = {
+        self.tech_skills_patterns: Dict[str, List[str]] = {
             'programming_languages': [ #pipe '|' means "any one of these can match" (match one at a time)
                 r'\b(?:python|java|javascript|typescript|c\+\+|c#|go|rust|php|ruby|swift|kotlin|scala|r|matlab|triton)\b',
                 r'\b(?:html|css|sql|nosql|bash|powershell)\b'
@@ -57,21 +57,21 @@ class JobAnalyzer:
             ]
         }
         #Experience level indicators
-        self.experience_indicators = {
+        self.experience_indicators: Dict[str, List[str]] = {
             'entry': [r'entry\s+level', r'junior', r'0-2\s+years', r'new\s+grad', r'recent\s+graduate'],
             'mid': [r'mid\s+level', r'2-5\s+years', r'3-6\s+years', r'intermediate'],
             'senior': [r'senior', r'5\+\s+years', r'6\+\s+years', r'7\+\s+years', r'lead', r'principal'],
             'executive': [r'director', r'vp', r'vice\s+president', r'c-level', r'chief', r'head\s+of']
         }
         #Education patterns: 
-        self.education_patterns = [
+        self.education_patterns: List[str] = [
             r"bachelor[']?s?\s+(?:degree\s+)?(?:in\s+)?([a-zA-Z\s]+)",
             r"master[']?s?\s+(?:degree\s+)?(?:in\s+)?([a-zA-Z\s]+)",
             r"phd\s+(?:in\s+)?([a-zA-Z\s]+)",
             r"(?:bs|ba|ms|ma|mba)\s+(?:in\s+)?([a-zA-Z\s]+)"
         ]
         #Certification patterns -- note: in re.findall, MUST include the IGNORECASE flag
-        self.certification_patterns = [
+        self.certification_patterns: List[str] = [
             r'aws\s+certified\s+([a-zA-Z\s-]+)',
             r'google\s+cloud\s+([a-zA-Z\s-]+)',
             r'microsoft\s+certified\s+([a-zA-Z\s-]+)',
@@ -244,7 +244,16 @@ class JobAnalyzer:
     def _extract_education_requirements(self, text: str) -> List[str]: 
         """Extract education requirements"""
         education_reqs = []
-        for pattern in self.education_patterns.items(): 
+        for pattern in self.education_patterns: 
+            matches = re.findall(pattern, text, re.IGNORECASE)
+            for match in matches: 
+                education_reqs.append(match.strip())
+        return education_reqs
+    
+    def _extract_certifications(self, text: str) -> List[str]: 
+        """Extract certification requirements"""
+        certs = []
+        for pattern in self.certification_patterns: 
             
 
 

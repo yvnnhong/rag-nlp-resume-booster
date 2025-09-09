@@ -134,4 +134,43 @@ class JobAnalyzer:
         
     def _clean_job_text(self, text: str) -> str: 
         """Clean and normalize job description text."""
+        if not text: 
+            return ""
+        #Remove excessive whitespace -- re.sub(pattern, replacement, string)
+        text = re.sub(r'\s+', ' ', text)
+        return text.strip().lower()
+    
+    def _extract_job_title(self, text: str) -> str: 
+        """Extract job title from the job description."""
+        #note: this is very generic; have to add more patterns/variations later 
+        #or use semantic search???? 
+        #yes. USE SEMANTIC SEARCH ALSKDFALKSJ
+        title_patterns = [ #carat ^ means "any char EXCEPT FOR"
+            r'(?:job\s+title|position|role):\s*([^\n]+)',
+            r'we\s+are\s+looking\s+for\s+(?:a\s+)?([^\n]+?)(?:\s+to\s+)',
+            r'seeking\s+(?:a\s+)?([^\n]+?)(?:\s+to\s+|\s+who\s+)',
+        ]
+        for pattern in title_patterns: 
+            match = re.search(pattern, text, re.IGNORECASE)
+            if match: 
+                return match.group(1).strip().title()
+        #Default fallback 
+        return "Software engineer"
+    
+    def _extract_company_info(self, text: str) -> Dict[str, str]: 
+        """Extract company information"""
+        company_info = {}
+        company_patterns = [
+            r'(?:company|organization):\s*([^\n]+)',
+            r'(?:join|work\s+at)\s+([A-Z][a-zA-Z\s]+)(?:\s+as\s+|\s+to\s+)',
+        ]
+        for pattern in company_patterns: 
+            match = re.search(pattern, text, re.IGNORECASE)
+            if match: 
+                company_info['company_name'] = match.group(1).strip()
+                break
+        return company_info
+    
+    def _extract_required_skills(self, text: str) -> List[str]: 
+        return List[str] #temp
 

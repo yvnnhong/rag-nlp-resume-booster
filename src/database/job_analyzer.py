@@ -85,6 +85,53 @@ class JobAnalyzer:
         Args: job_text (str): Raw job description text
         Returns: JobRequirements object 
         """
-        jq = JobRequirements()
-        return jq #temp
+        try: 
+            #Step 1: Clean and normalize text
+            cleaned_text = self._clean_job_text(job_text)
+            #Step 2: Extract different components: 
+            job_title = self._extract_job_title(cleaned_text)
+            company_info = self._extract_company_info(cleaned_text)
+            required_skills = self._extract_required_skills(cleaned_text)
+            preferred_skills = self._extract_preferred_skills(cleaned_text)
+            experience_info = self._extract_experience_requirements(cleaned_text)
+            education_reqs = self._extract_education_requirements(cleaned_text)
+            certifications = self._extract_certifications(cleaned_text)
+            responsibilities = self._extract_responsibilities(cleaned_text)
+            salary_range = self._extract_salary_range(cleaned_text)
+            industry = self._extract_industry(cleaned_text)
+
+            requirements = JobRequirements(
+                job_title=job_title,
+                company_info=company_info,
+                required_skills=required_skills,
+                preferred_skills=preferred_skills,
+                experience_years=experience_info['years'],
+                experience_level=experience_info['level'],
+                education_requirements=education_reqs,
+                certifications=certifications,
+                responsibilities=responsibilities,
+                salary_range=salary_range,
+                industry=industry
+            )
+            logger.info(f"Successfully analyzed job description for {job_title}.")
+            return requirements
+        except Exception as e: 
+            logger.error(f"Error anlayzing job description: {str(e)}")
+            #Next, return empty JobRequirements object
+            return JobRequirements(
+                job_title="Unknown",
+                company_info={},
+                required_skills=[],
+                preferred_skills=[],
+                experience_years=None,
+                experience_level="unknown",
+                education_requirements=[],
+                certifications=[],
+                responsibilities=[],
+                salary_range=None,
+                industry="unknown"
+            )
+        
+    def _clean_job_text(self, text: str) -> str: 
+        """Clean and normalize job description text."""
 

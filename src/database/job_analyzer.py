@@ -21,3 +21,22 @@ class JobRequirements:
     ):
         self.required_skills = required_skills
         self.preferreed_skills = preferred_skills
+        self.experience_years = experience_years
+        self.experience_level = experience_level
+        self.education_requirements = education_requirements
+        self.certifications = certifications
+        self.responsibilities = responsibilities
+        self.company_info = company_info
+        self.salary_range = salary_range
+        self.job_title = job_title
+        self.industry = industry
+
+class JobAnalyzer: 
+    """Extract and analyze requirements from job descriptions"""
+    def __init__(self): 
+        self.tech_skills_patterns = {
+            'programming_languages': [ #pipe '|' means "any one of these can match" (match one at a time)
+                r'\b(?:python|java|javascript|typescript|c\+\+|c#|go|rust|php|ruby|swift|kotlin|scala|r|matlab)\b',
+                r'\b(?:html|css|sql|nosql|bash|powershell)\b'
+            ]
+        }

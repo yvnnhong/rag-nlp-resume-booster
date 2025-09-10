@@ -68,6 +68,10 @@ class VectoreStore:
     dense vector embeddings of sentences. Useful for enabling semantic 
     search.
 
+    Embeddings: a specific type of vector that is learned through a ML model
+    to capture the meaning + relationships within the original data. 
+    Embeddings are almost always vectors, but not all vectors are embeddings.
+
     Embedding model: a ML model that converts text into vectors (embeddings)
     in a multi-dimensional space. These vectors capture the semantic meaning
     and relationships within the data.
@@ -84,7 +88,7 @@ class VectoreStore:
         Args: model_name: HuggingFace model name for embeddings.
 
         HuggingFace: a python-based open-source library (platform) 
-        where devs can share pre-traine ML models 
+        where devs can share pre-trained ML models 
         """
         self.model_name = model_name
         self.embedding_model = None
@@ -95,3 +99,6 @@ class VectoreStore:
         self.exact_match_threshold = 0.95 #x >=0.95
         self.strong_match_threshold = 0.80 #0.80 <= x < 0.95
         self.moderate_match_threshold = 0.60 #0.60 <= x < 0.80
+
+        self._initialize_embedding_model()
+

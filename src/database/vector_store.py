@@ -82,6 +82,9 @@ class VectoreStore:
         """
         Initialize vector store with sentence transformer model. 
         Args: model_name: HuggingFace model name for embeddings.
+
+        HuggingFace: a python-based open-source library (platform) 
+        where devs can share pre-traine ML models 
         """
         self.model_name = model_name
         self.embedding_model = None

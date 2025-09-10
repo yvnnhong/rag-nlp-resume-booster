@@ -14,7 +14,45 @@ areas of improvement, domain strength/weaknesses)
 import numpy as np
 import logging
 from typing import Dict, List, Tuple, Any, Optional
-from sentence_transformers import SentenceTransformer
+from sentence_transformers import SentenceTransformer #uses pytorch 
 import chromadb 
 from chromadb.config import Settings
 import os
+
+logger = logging.getLogger(__name__)
+class MatchResult: 
+    """Data class for storing match results."""
+    def __init__(
+        self, 
+        skill: str, 
+        similarity_score: float, 
+        resume_text: str, 
+        job_requirement: str, 
+        match_type: str #'exact', 'semantic', 'partial'
+    ):
+        self.skill = skill
+        self.similarity_score = similarity_score
+        self.resume_text = resume_text
+        self.job_requirement = job_requirement
+        self.match_type = match_type
+
+class ResumeJobMatch: 
+    """Comprehensive matching results betwene resume and job."""
+    def __init__(
+        self,
+        overall_match_score: float,
+        skills_analysis: Dict[str, Any],
+        experience_match: Dict[str, Any],
+        missing_skills: List[str],
+        matching_skills: List[MatchResult],
+        recommendations: List[str],
+        ats_score: float
+    ):
+        self.overall_match_score = overall_match_score
+        self.skills_analysis = skills_analysis
+        self.experience_match = experience_match
+        self.missing_skills = missing_skills
+        self.matching_skills = matching_skills
+        self.recommendations = recommendations
+        self.ats_score = ats_score
+

@@ -58,7 +58,7 @@ class ResumeJobMatch:
         self.recommendations = recommendations
         self.ats_score = ats_score
 
-class VectoreStore: 
+class VectorStore: 
     """
     Handle embeddings and similarity matching for resume-job analysis.
 
@@ -107,5 +107,22 @@ class VectoreStore:
 
     def _initialize_embedding_model(self): 
         """Load the sentence transformer model."""
+        try: 
+            logger.info(f"Loading embedding model: {self.model_name}")
+            self.embedding_model = SentenceTransformer(self.model_name)
+            logger.info("Embedding model loaded successfully.")
+        except Exception as e: 
+            logger.error(f"Failed to load embedding mode: {str(e)}")
+            raise 
+
+    def _initialize_vector_database(self): 
+        """Initialize ChromaDB for vector storage."""
+        try: 
+            #create chromadb client 
+            self.chroma_client = chromadb.Client(Settings(
+                chroma_db_impl="duckdb+parquet",
+                persist_directory="./vector_db"
+            ))
+            #todo: annotations
 
 

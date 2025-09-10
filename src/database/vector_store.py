@@ -56,3 +56,34 @@ class ResumeJobMatch:
         self.recommendations = recommendations
         self.ats_score = ats_score
 
+class VectoreStore: 
+    """
+    Handle embeddings and similarity matching for resume-job analysis.
+
+    Sentence embedding: condenses an entire sentence's meaning into a 
+    single vector. Sentences with similar meaning will have embeddings that 
+    are "closer" together in a high-dimensional vector space
+
+    Sentence transformer: a library and framework for creating high-quality 
+    dense vector embeddings of sentences. Useful for enabling semantic 
+    search
+
+    Embedding model: a ML model that converts text into vectors (embeddings)
+    in a multi-dimensional space. These vectors capture the semantic meaning
+    and relationships within the data.
+    Here, we use the embedding model all-MiniLM-L6-v2 (designed for NLP tasks 
+    such as semantic search) as our default embedding model, unless otherwise
+    specified.
+
+    """
+    def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
+        """
+        Initialize vector store with sentence transformer model. 
+        Args: model_name: HuggingFace model name for embeddings.
+        """
+        self.model_name = model_name
+        self.embedding_model = None
+        self.chroma_client = None
+        self.collection = None
+        
+        #Similarity thresholds (using cosine similarity)

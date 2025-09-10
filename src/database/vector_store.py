@@ -1,5 +1,7 @@
 """
 vector_store.py
+Focuses on ChromaDB operations and basic vector search. 
+
 This vector store implementation handle: 
 - Sentence transformer embeddings for semantic similarity 
 -ChromaDB integration for vector storage 
@@ -101,4 +103,9 @@ class VectoreStore:
         self.moderate_match_threshold = 0.60 #0.60 <= x < 0.80
 
         self._initialize_embedding_model()
+        self._initialize_vector_database()
+
+    def _initialize_embedding_model(self): 
+        """Load the sentence transformer model."""
+
 

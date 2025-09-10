@@ -66,14 +66,16 @@ class VectoreStore:
 
     Sentence transformer: a library and framework for creating high-quality 
     dense vector embeddings of sentences. Useful for enabling semantic 
-    search
+    search.
 
     Embedding model: a ML model that converts text into vectors (embeddings)
     in a multi-dimensional space. These vectors capture the semantic meaning
     and relationships within the data.
-    Here, we use the embedding model all-MiniLM-L6-v2 (designed for NLP tasks 
-    such as semantic search) as our default embedding model, unless otherwise
-    specified.
+    note: sentence transformer = a specific type of embedding model. 
+    (sentence transformer models are a subset of embedding models.)
+    Here, we use the pre-trained sentence transformer model 
+    all-MiniLM-L6-v2 (designed for NLP tasks such as semantic search) 
+    as our default embedding model, unless otherwise specified.
 
     """
     def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
@@ -87,3 +89,6 @@ class VectoreStore:
         self.collection = None
         
         #Similarity thresholds (using cosine similarity)
+        self.exact_match_threshold = 0.95 #x >=0.95
+        self.strong_match_threshold = 0.80 #0.80 <= x < 0.95
+        self.moderate_match_threshold = 0.60 #0.60 <= x < 0.80

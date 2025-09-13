@@ -146,7 +146,7 @@ rag-resume-optimization/
 │   │   ├── job_analyzer.py #refactor + add spacy ner
 │   │   └── vector_store.py #refactor
 │   └── interface/
-│       └── gradio_app.py
+│       └── gradio_app.py # add dual upload w/ resume + job description 
 ├── data/
 │   └── sample_resumes/
 ├── tests/

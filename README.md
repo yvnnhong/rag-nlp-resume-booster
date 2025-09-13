@@ -143,8 +143,8 @@ rag-resume-optimization/
 │   │   ├── text_processor.py
 │   │   └── section_parser.py
 │   ├── database/
-│   │   ├── job_analyzer.py
-│   │   └── vector_store.py
+│   │   ├── job_analyzer.py #refactor + add spacy ner
+│   │   └── vector_store.py #refactor
 │   └── interface/
 │       └── gradio_app.py
 ├── data/

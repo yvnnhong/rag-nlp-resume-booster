@@ -140,8 +140,8 @@ rag-resume-optimization/
 ├── src/
 │   ├── parser/
 │   │   ├── pdf_extractor.py
-│   │   ├── text_processor.py
-│   │   └── section_parser.py
+│   │   ├── text_processor.py #refactor to use NER
+│   │   └── section_parser.py #^
 │   ├── database/
 │   │   ├── job_analyzer.py #refactor + add spacy ner
 │   │   └── vector_store.py #refactor

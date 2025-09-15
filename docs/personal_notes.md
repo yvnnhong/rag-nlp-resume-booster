@@ -35,3 +35,7 @@ the job description.
 
 ### Problem 2: test_section_parser.py is returning 0 sections found for all tests
 Fix this after the core RAG logic is implemented. Prioritize getting a working prototype first  
+
+### Problem 3: regex parsing misses too many cases
+fix with spacy NER
+

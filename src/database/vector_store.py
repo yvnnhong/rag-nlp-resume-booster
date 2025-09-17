@@ -39,7 +39,7 @@ class MatchResult:
         self.match_type = match_type
 
 class ResumeJobMatch: 
-    """Comprehensive matching results betwene resume and job."""
+    """Comprehensive matching results between resume and job."""
     def __init__(
         self,
         overall_match_score: float,
@@ -162,7 +162,32 @@ class VectorStore:
             return np.array([])
         
     def calculate_similarity(self, text1: str, text2: str) -> float: 
-        return 0.0 #pass
+        """
+        Calculate semantic similarity between two texts. 
+        Args: 
+        text1: first text
+        text2: second text 
+        Returns: a similarity score between 0 and 1 (using cosine similarity)
+        """
+        try: 
+            embeddings = self.generate_embeddings([text1, text2])
+            if len(embeddings) != 2: 
+                return 0.0
+            #compute cosine similarity
+            #note: embedding1, embedding2 are 1d np arrays 
+            embedding1, embedding2 = embeddings[0], embeddings[1] #unpack
+            similarity = np.dot(embedding1, embedding2) / (
+                np.linalg.norm(embedding1) * np.linalg.norm(embedding2)
+            )
+            return float(similarity)
+        except Exception as e: 
+            logger.error(f"Error calculating similarity: {str(e)}")
+            return 0.0
+
+    def match_resume_to_job(self, resume_text: str, job_requirements: Any) -> ResumeJobMatch: 
+        pass
+            
+    
 
 
 

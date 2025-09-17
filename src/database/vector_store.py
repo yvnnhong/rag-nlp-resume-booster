@@ -145,7 +145,24 @@ class VectorStore:
             raise #re-raise to let the caller of the program know what went wrong
     
     def generate_embeddings(self, texts: List[str]) -> np.ndarray: 
-        pass #temp
+        """
+        Generate embeddings for a list of texts. 
+        Args: 
+        texts: List of text strings to embed
+        returns: a numpy array of embeddings (nd = "n-dimensional")
+        """
+        try: 
+            if not texts: 
+                return np.array([])
+            embeddings = self.embedding_model.encode(texts, convert_to_numpy=True)
+            logger.info(f"Generated embeddings for {len(texts)} texts")
+            return embeddings
+        except Exception as e: 
+            logger.error(f"Error generating embeddings: {str(e)}")
+            return np.array([])
+        
+    def calculate_similarity(self, text1: str, text2: str) -> float: 
+        return 0.0 #pass
 
 
 

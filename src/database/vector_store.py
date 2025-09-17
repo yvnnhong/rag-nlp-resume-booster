@@ -20,6 +20,7 @@ from sentence_transformers import SentenceTransformer #uses pytorch
 import chromadb 
 from chromadb.config import Settings
 import os
+import re
 from src.database.job_analyzer import JobRequirements
 
 logger = logging.getLogger(__name__)
@@ -236,7 +237,30 @@ class VectorStore:
         
     def _extract_resume_skills(self, resume_text: str) -> List[str]: 
         """Extract skills mentioned in resume. """
-        pass #temp
+        skill_patterns = [
+            r'\b(?:python|java|javascript|typescript|c\+\+|c#|go|rust|php|ruby|swift|kotlin)\b',
+            r'\b(?:react|angular|vue|django|flask|spring|express|node\.?js)\b',
+            r'\b(?:mysql|postgresql|mongodb|redis|elasticsearch)\b',
+            r'\b(?:aws|azure|gcp|docker|kubernetes|git|jenkins)\b',
+            r'\b(?:machine learning|ai|nlp|deep learning|data science)\b',
+            r'\b(?:html|css|sql|nosql|rest|api|microservices)\b'
+        ]
+        skills = set()
+        resume_lower = resume_text.lower()
+        for pattern in skill_patterns: 
+            matches = re.findall(pattern, resume_lower, re.IGNORECASE)
+            skills.update(matches)
+        return list(skills)
+    
+    def _extract_experience_indicators(self, resume_text: str) -> Dict[str, Any]: 
+        """Extract experience indicators from resume"""
+        experience_info = {
+            'years_mentioned': [],
+            'roles': [],
+            'companies': [],
+            'estimated_years': 0
+        }
+
             
     
 

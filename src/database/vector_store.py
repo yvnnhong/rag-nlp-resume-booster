@@ -20,6 +20,7 @@ from sentence_transformers import SentenceTransformer #uses pytorch
 import chromadb 
 from chromadb.config import Settings
 import os
+from src.database.job_analyzer import JobRequirements
 
 logger = logging.getLogger(__name__)
 class MatchResult: 
@@ -185,7 +186,57 @@ class VectorStore:
             return 0.0
 
     def match_resume_to_job(self, resume_text: str, job_requirements: Any) -> ResumeJobMatch: 
-        pass
+        """
+        Main method to match resume against job requirements.
+        Args: 
+        resume_text: Cleaned resume text
+        job_requirements: JobRequirements object from job_analyzer (imported at top)
+        Returns: 
+        ResumeJobMatch object
+        """
+        try: 
+            logger.info("Starting resume-job matching analysis")
+            #Extract resume skills and content 
+            resume_skills = self._extract_resume_skills(resume_text)
+            resume_experience = self._extract_experience_indicators(resume_text)
+            #Analyze skills matching
+            skills_analysis = self._analyze_skills_match(
+                resume_skills, resume_text, job_requirements
+            )
+            #Analyze experience matching
+            experience_match = self._analyze_experience_match(
+                resume_experience, job_requirements
+            )
+            #Calculate overall scores 
+            overall_score = self._calculate_overall_match_score(
+                skills_analysis, experience_match
+            )
+            #Generate recommendations 
+            recommendations = self._generate_recommendations(
+                skills_analysis, experience_match, job_requirements
+            )
+            #Compute ATS score 
+            ats_score = self._calculate_ats_score(
+                resume_text, job_requirements
+            )
+            match_result = ResumeJobMatch(
+                overall_match_score = overall_score, 
+                skills_analysis = skills_analysis,
+                experience_match = experience_match,
+                missing_skills = skills_analysis['missing_skills'],
+                matching_skills = skills_analysis['matching_skills'],
+                recommendations=recommendations,
+                ats_score=ats_score
+            )
+            logger.info(f"Matching analysis complete. Overall score: {overall_score: .2f}")
+            return match_result
+        except Exception as e: 
+            logger.error(f"Error in resume-job matching: {str(e)}")
+            return self._empty_match_result()
+        
+    def _extract_resume_skills(self, resume_text: str) -> List[str]: 
+        """Extract skills mentioned in resume. """
+        pass #temp
             
     
 

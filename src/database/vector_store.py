@@ -2,7 +2,7 @@
 vector_store.py
 Focuses on ChromaDB operations and basic vector search. 
 
-This vector store implementation handle: 
+This vector store implementation handles: 
 - Sentence transformer embeddings for semantic similarity 
 -ChromaDB integration for vector storage 
 -skills matching with exact, semantic, and contextual detection
@@ -119,10 +119,33 @@ class VectorStore:
         """Initialize ChromaDB for vector storage."""
         try: 
             #create chromadb client 
+            #client = object that provides an interface to talk to the ChromaDB server
+            #duckdb is the query engine; parquet is the storage format (a highly 
+            #compressed, columnar format)
+            #basically: we store the vector data in Parquet files, and we query it 
+            #with Duckdb (this is local setup -- NOT cloud based, fast, + persistent 
+            #b/c it survives between program runs b/c it's saved in ./vector_db)
             self.chroma_client = chromadb.Client(Settings(
                 chroma_db_impl="duckdb+parquet",
                 persist_directory="./vector_db"
             ))
-            #todo: annotations
+            #create or get collection
+            """
+            get_or_create_collection(): 
+            - if a collection with that name already exists, return it 
+            - if it doesn't already exist, create a new one, then return it 
+            """
+            self.collection = self.chroma_client.get_or_create_collection(
+                name="resume_job_matching",
+                metadata={"description": "Resume and job requirement embeddings"}
+            )
+            logger.info("Vector database initialized successfully")
+        except Exception as e: 
+            logger.error(f"Failed to initialize vector database: {str(e)}")
+            raise #re-raise to let the caller of the program know what went wrong
+    
+    def generate_embeddings(self, texts: List[str]) -> np.ndarray: 
+        pass #temp
+
 
 
